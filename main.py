@@ -1,6 +1,8 @@
 import os
 import json
 import re
+import time
+import random
 import urllib.parse
 from datetime import datetime
 from playwright.sync_api import sync_playwright
@@ -14,12 +16,22 @@ DEFAULT_DB = {
         "フルラ 財布": {
             "condition_excellent": 11000,  # 未使用に近い
             "condition_good": 5500,        # やや傷や汚れあり
-            "shipping_fee_est": 370        # レターパックライト等を想定
+            "shipping_fee_est": 370
         },
         "エルメス シューズ": {
             "condition_excellent": 45000,
             "condition_good": 22000,
-            "shipping_fee_est": 850        # メルカリ便80サイズを想定
+            "shipping_fee_est": 850
+        },
+        "オールドコーチ": {
+            "condition_excellent": 18000,  # ヴィンテージ品のため良好品は高値
+            "condition_good": 8500,
+            "shipping_fee_est": 750
+        },
+        "ゲンテン カットワーク": {
+            "condition_excellent": 25000,  # ファンが多く高値で取引される
+            "condition_good": 12000,
+            "shipping_fee_est": 750
         }
     }
 }
@@ -36,7 +48,7 @@ def load_database():
 db = load_database()
 
 # ---------------------------------------------------------------------
-# 2. ヤフオク自動巡回（Playwrightによる擬態アクセス）
+# 2. ヤフオク時間パース関数
 # ---------------------------------------------------------------------
 def parse_yahoo_time(time_text):
     if not time_text:
@@ -55,67 +67,6 @@ def parse_yahoo_time(time_text):
         return 1
     return minutes if minutes > 0 else 9999
 
-def scrape_yahoo_candidates(keyword):
-    encoded_kw = urllib.parse.quote(keyword)
-    # ストア限定(is_store=1)、24時間以内終了、価格ありの検索URL
-    url = f"https://auctions.yahoo.co.jp/search/search?p={encoded_kw}&is_store=1&istatus=1&istatus=3&istatus=4&istatus=5&price_type=currentprice&s1=end&o1=a"
-    
-    candidates = []
-    
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        # 人間のブラウザに見えるように偽装
-        context = browser.new_context(
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
-        )
-        page = context.new_page()
-        
-        try:
-            page.goto(url, timeout=45000)
-            page.wait_for_timeout(3000) # 読み込みを3秒優しく待つ
-            
-            html_content = page.content()
-            soup = BeautifulSoup(html_content, "html.parser")
-            products = soup.select(".Product")
-            
-            for product in products[:30]:  # 上位30件を詳細判定
-                try:
-                    title_el = product.select_one(".Product__titleLink")
-                    if not title_el:
-                        continue
-                    title = title_el.text.strip()
-                    item_url = title_el.get("href")
-                    
-                    price_text = product.select_one(".Product__priceValue").text
-                    price = int(re.sub(r'[^\d]', '', price_text))
-                    
-                    time_text = product.select_one(".Product__time").text.strip()
-                    time_m = parse_yahoo_time(time_text)
-                    
-                    # 24時間（1440分）以内のものだけ
-                    if time_m > 1440:
-                        continue
-                        
-                    img_el = product.select_one(".Product__imageData")
-                    img_url = img_el.get("src") if img_el else ""
-                    
-                    candidates.append({
-                        "title": title,
-                        "url": item_url,
-                        "current_price": price,
-                        "remaining_time": time_text,
-                        "img_url": img_url,
-                        "time_m": time_m
-                    })
-                except Exception:
-                    continue
-        except Exception as e:
-            print(f"検索エラー ({keyword}): {e}")
-        finally:
-            browser.close()
-            
-    return candidates
-
 # ---------------------------------------------------------------------
 # 3. 利益計算ロジック（期待値算出エンジン）
 # ---------------------------------------------------------------------
@@ -124,8 +75,7 @@ def calculate_profit(item, db_entry, keyword):
     price = item["current_price"]
     
     # タイトルから状態を推測（擬似コンディション判定）
-    # 「未使用」「極美品」「新品」などがあればexcellent相場を採用、それ以外はgood相場を採用
-    is_excellent = any(word in title for word in ["未使用", "極美品", "新品", "デッドストック", "Sランク"])
+    is_excellent = any(word in title for word in ["未使用", "極美品", "新品", "デッドストック", "Sランク", "美品"])
     
     if is_excellent:
         m_price = db_entry["condition_excellent"]
@@ -138,18 +88,13 @@ def calculate_profit(item, db_entry, keyword):
     mercari_fee = int(m_price * 0.10)
     # メルカリ送料
     m_shipping = db_entry["shipping_fee_est"]
-    # ヤフオクから自宅への送料（大体の目安として一律設定：財布500円、靴1000円）
+    # ヤフオクから自宅への送料（目安）
     y_shipping = 500 if "財布" in keyword else 1000
     
-    # 期待される手取り額（売上 - 手数料 - メルカリ送料）
     net_revenue = m_price - mercari_fee - m_shipping
-    # かかるコスト合計（ヤフオク落札額 + ヤフオク送料）
     total_cost = price + y_shipping
-    
-    # 期待利益
     expected_profit = net_revenue - total_cost
     
-    # 星評価
     if expected_profit >= 5000:
         stars = "★★★★★"
     elif expected_profit >= 3000:
@@ -174,23 +119,89 @@ def calculate_profit(item, db_entry, keyword):
     }
 
 # ---------------------------------------------------------------------
-# 4. メイン処理 & index.html 自動生成
+# 4. メイン処理（Playwright 1起動で巡回するお行儀仕様）
 # ---------------------------------------------------------------------
 def main():
     all_bargains = []
     
-    # 対象キーワードを巡回
-    for kw, entry in db["market_prices"].items():
-        print(f"🔍 {kw} の巡回を開始します...")
-        items = scrape_yahoo_candidates(kw)
+    print("🚀 お行儀エチケット対応クローラーを起動します...")
+    
+    with sync_playwright() as p:
+        # ブラウザは1回だけ立ち上げる
+        browser = p.chromium.launch(headless=True)
+        context = browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+            viewport={"width": 1920, "height": 1080}
+        )
+        page = context.new_page()
         
-        for item in items:
-            result = calculate_profit(item, entry, kw)
-            # 期待利益がプラスかつ星3つ（利益1,000円以上）のものだけを収集
-            if result["expected_profit"] >= 1000:
-                result["keyword"] = kw
-                all_bargains.append(result)
+        # 各キーワードを同じブラウザで巡回
+        for i, (kw, entry) in enumerate(db["market_prices"].items()):
+            # 2つ目以降のキーワードの前に、人間らしいランダムな間隔（3〜7秒）を空ける
+            if i > 0:
+                sleep_time = random.uniform(3.0, 7.0)
+                print(f"💤 サーバー負荷軽減のため、{sleep_time:.1f}秒待機します...")
+                time.sleep(sleep_time)
                 
+            print(f"🔍 {kw} のヤフオクストア巡回を開始します...")
+            
+            encoded_kw = urllib.parse.quote(kw)
+            url = f"https://auctions.yahoo.co.jp/search/search?p={encoded_kw}&is_store=1&istatus=1&istatus=3&istatus=4&istatus=5&price_type=currentprice&s1=end&o1=a"
+            
+            try:
+                page.goto(url, timeout=45000)
+                page.wait_for_timeout(3000) # ページ読み込み後の余韻（3秒）
+                
+                html_content = page.content()
+                soup = BeautifulSoup(html_content, "html.parser")
+                products = soup.select(".Product")
+                
+                scraped_count = 0
+                for product in products[:30]:
+                    try:
+                        title_el = product.select_one(".Product__titleLink")
+                        if not title_el:
+                            continue
+                        title = title_el.text.strip()
+                        item_url = title_el.get("href")
+                        
+                        price_text = product.select_one(".Product__priceValue").text
+                        price = int(re.sub(r'[^\d]', '', price_text))
+                        
+                        time_text = product.select_one(".Product__time").text.strip()
+                        time_m = parse_yahoo_time(time_text)
+                        
+                        if time_m > 1440:  # 24時間以内
+                            continue
+                            
+                        img_el = product.select_one(".Product__imageData")
+                        img_url = img_el.get("src") if img_el else ""
+                        
+                        item_data = {
+                            "title": title,
+                            "url": item_url,
+                            "current_price": price,
+                            "remaining_time": time_text,
+                            "img_url": img_url,
+                            "time_m": time_m
+                        }
+                        
+                        result = calculate_profit(item_data, entry, kw)
+                        if result["expected_profit"] >= 1000:
+                            result["keyword"] = kw
+                            all_bargains.append(result)
+                            scraped_count += 1
+                            
+                    except Exception:
+                        continue
+                        
+                print(f"   -> 利益対象商品が {scraped_count} 件見つかりました")
+                
+            except Exception as e:
+                print(f"❌ {kw} の検索中にエラーが発生しました: {e}")
+                
+        browser.close()
+
     # 利益順に並び替え
     all_bargains.sort(key=lambda x: x["expected_profit"], reverse=True)
     
@@ -200,7 +211,7 @@ def main():
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(db, f, ensure_ascii=False, indent=2)
         
-    # --- HTML 生成テンプレート (index.htmlとして自動出力) ---
+    # --- HTML 生成テンプレート ---
     html_template = """<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -213,7 +224,7 @@ def main():
             --card-bg: #ffffff;
             --text-color: #1c1917;
             --text-muted: #78716c;
-            --accent-color: #e11d48; /* 温かみのあるロゼ・レッド */
+            --accent-color: #e11d48;
             --border-color: #e7e5e4;
             --star-color: #f59e0b;
         }
@@ -258,6 +269,7 @@ def main():
             gap: 10px;
             margin-bottom: 25px;
             justify-content: center;
+            flex-wrap: wrap;
         }
         .filter-btn {
             background-color: var(--card-bg);
@@ -404,6 +416,8 @@ def main():
             <button class="filter-btn active" onclick="filterItems('all')">すべて表示</button>
             <button class="filter-btn" onclick="filterItems('フルラ 財布')">フルラ 財布</button>
             <button class="filter-btn" onclick="filterItems('エルメス シューズ')">エルメス シューズ</button>
+            <button class="filter-btn" onclick="filterItems('オールドコーチ')">オールドコーチ</button>
+            <button class="filter-btn" onclick="filterItems('ゲンテン カットワーク')">ゲンテン カットワーク</button>
         </div>
         
         <div class="grid" id="item-grid">
