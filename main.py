@@ -4,7 +4,7 @@ import re
 import time
 import random
 import urllib.parse
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from playwright.sync_api import sync_playwright
 from bs4 import BeautifulSoup
 
@@ -184,10 +184,22 @@ DEFAULT_DB = {
             "condition_good": 26000,
             "shipping_fee_est": 850
         },
-        "ペリーコ シューズ": {
+        "ペリーコ シューズ パンプス": {
             "category": "shoes_ladies",
             "condition_excellent": 12000,
             "condition_good": 6000,
+            "shipping_fee_est": 850
+        },
+        "ドルチェガッバーナ シューズ": {
+            "category": "shoes_ladies",
+            "condition_excellent": 20000,
+            "condition_good": 10000,
+            "shipping_fee_est": 850
+        },
+        "マイケルコース シューズ": {
+            "category": "shoes_ladies",
+            "condition_excellent": 10000,
+            "condition_good": 5000,
             "shipping_fee_est": 850
         },
 
@@ -239,21 +251,28 @@ DEFAULT_DB = {
             "condition_excellent": 10000,
             "condition_good": 5500,
             "shipping_fee_est": 850
+        },
+        "コンバース スニーカー": {
+            "category": "shoes_mens",
+            "condition_excellent": 8000,
+            "condition_good": 4500,
+            "shipping_fee_est": 850
         }
     }
 }
 
-# 致命的な状態を示す除外NGパターン（問題④の追加分含む）
+# 致命的な状態を示す除外NGパターン（修理品・補修はバッジ警告運用のため削除）
 NG_PATTERNS = [
     r'部品', r'空箱', r'箱のみ', r'保存袋', r'確認用',
     r'replica', r'レプリカ', r'コピー', r'非売品',
     r'ソール.*破れ', r'ソール.*穴', r'ソール.*亀裂',
     r'穴あり', r'破れあり', r'亀裂あり',
     r'ドライビングシューズ', r'ジャンク', r'難あり',
-    r'型崩れ', r'修理品', r'補修'
+    r'インソール.*型崩れ', r'踵.*型崩れ', r'かかと.*型崩れ',
+    r'黄ばみ.*ひどい', r'カビ',
+    r'型崩れ'  # 致命的な型崩れはNGに残します
 ]
 
-# 🟢 古い data.json のキー不足を自動修復する機能（問題⑤対策）
 def load_database():
     if os.path.exists("data.json"):
         try:
@@ -264,21 +283,19 @@ def load_database():
             if "market_prices" in loaded:
                 for kw, entry in DEFAULT_DB["market_prices"].items():
                     if kw in loaded["market_prices"]:
-                        # categoryキーがない場合にDEFAULT_DBから自動修復してデグレを防ぐ
                         if "category" not in loaded["market_prices"][kw]:
                             loaded["market_prices"][kw]["category"] = entry["category"]
                         for key in ["condition_excellent", "condition_good", "shipping_fee_est"]:
                             if key not in loaded["market_prices"][kw]:
                                 loaded["market_prices"][kw][key] = entry[key]
                     else:
-                        # 新規ブランドが data.json にない場合はDEFAULT_DBから自動追加
                         loaded["market_prices"][kw] = entry
             else:
                 loaded["market_prices"] = DEFAULT_DB["market_prices"]
                 
             return loaded
         except Exception as e:
-            print(f"⚠️ データベース修復処理で微細な競合が発生: {e}")
+            print(f"⚠️ データベース修復警告: {e}")
             pass
     return DEFAULT_DB
 
@@ -305,13 +322,14 @@ def parse_yahoo_time(time_text):
     return minutes if minutes > 0 else 9999
 
 # ---------------------------------------------------------------------
-# 3. 👠 高度なサイズ判定エンジン（靴専用）
+# 3. 👠 高度なサイズ判定エンジン
 # ---------------------------------------------------------------------
 def check_shoe_size_ok(title, category):
     if category not in ["shoes_ladies", "shoes_mens"]:
         return True, "判定不要"
         
-    size_cm = re.search(r'(\d{2}\.\d|\d{2})\s*(?:cm|センチ)?', title)
+    # 🔴 センチ表記（cm、センチ）が明示されている場合のみマッチ（年号や価格の誤除外防止）(新問題②対策)
+    size_cm = re.search(r'(\d{2}(?:\.\d)?)\s*(?:cm|センチ)', title)
     size_eu = re.search(r'(?:サイズ|EU|US|UK)\s*(\d{2}(?:\.\d)?)', title, re.IGNORECASE)
     
     detected_size = None
@@ -347,16 +365,15 @@ def check_shoe_size_ok(title, category):
 # ---------------------------------------------------------------------
 def verify_store_and_get_condition(page, product_url):
     try:
-        page.goto(product_url, timeout=30000)
-        page.wait_for_timeout(1500)  # しっかりロードされるのを待つ
+        page.goto(product_url, timeout=20000, wait_until="domcontentloaded")
+        time.sleep(1.0)  # 🔴 wait_for_timeoutを安全な time.sleep(1.0) に全置換 (バグ①対策)
         
         content = page.content()
         
-        # 検証A: ストア確定の厳格検証 (問題①対策)
+        # 検証A: ストア確定の厳格検証
         is_store = False
         if '"isStore":"1"' in content or '"isStore":true' in content or '"isStore":1' in content:
             is_store = True
-        # "ストア" 単体での曖昧マッチを排除し、厳密なクラス・属性でのみ判定する
         elif 'data-seller-type="store"' in content or 'StoreLabel' in content or 'gv-Label--trust' in content or 'ストアアカウント' in content or 'store.shopping.yahoo.co.jp' in content:
             is_store = True
             
@@ -367,7 +384,8 @@ def verify_store_and_get_condition(page, product_url):
         exact_condition = "やや傷や汚れあり"
         condition_type = "good"
         
-        if any(x in content for x in ["未使用", "未使用に近い", "新品", "Sランク", "展示品"]):
+        # 🔴 長い文字列である「未使用に近い」を最優先で探索するように順番を修正 (潜在問題①対策)
+        if any(x in content for x in ["未使用に近い", "未使用", "新品", "Sランク", "展示品"]):
             exact_condition = "未使用に近い"
             condition_type = "excellent"
         elif "目立った傷や汚れなし" in content:
@@ -387,7 +405,56 @@ def verify_store_and_get_condition(page, product_url):
         return False, None, None
 
 # ---------------------------------------------------------------------
-# 5. 📊 利益計算ロジック（ダブル送料・手数料完全シミュレート）
+# 5. 📈 【深夜限定】落札相場の実勢自動更新エンジン (closedsearch完全対応)
+# ---------------------------------------------------------------------
+def update_market_prices_from_sold(page, db_obj):
+    print("📈 落札相場の自動更新を開始します...")
+    
+    for kw, entry in db_obj["market_prices"].items():
+        try:
+            encoded_kw = urllib.parse.quote(kw)
+            # 🔴 落札結果専用の closedsearch URL へ完全置換 (バグ③対策)
+            url = f"https://auctions.yahoo.co.jp/closedsearch/closedsearch?p={encoded_kw}&is_store=1&s1=end&o1=d&n=20"
+            
+            page.goto(url, timeout=20000, wait_until="domcontentloaded")
+            time.sleep(2.0)  # 🔴 time.sleep に統一
+            
+            soup = BeautifulSoup(page.content(), "html.parser")
+            prices = []
+            for product in soup.select(".Product"):
+                price_el = product.select_one(".Product__priceValue")
+                if price_el:
+                    price = int(re.sub(r'[^\d]', '', price_el.text))
+                    if price > 500:  # 異常安値を除外
+                        prices.append(price)
+            
+            if len(prices) >= 5:
+                prices.sort()
+                trim = max(1, len(prices) // 5)
+                trimmed = prices[trim:-trim]
+                if len(trimmed) > 0:
+                    median_price = int(sum(trimmed) / len(trimmed))
+                    current = entry["condition_good"]
+                    # 相場の急激な暴走を防ぐ±50%安全弁
+                    if 0.5 <= median_price / current <= 2.0:
+                        db_obj["market_prices"][kw]["condition_good"] = median_price
+                        db_obj["market_prices"][kw]["condition_excellent"] = int(median_price * 1.8)
+                        print(f"   ✅ {kw}: {current:,}円 → {median_price:,}円 に自動学習更新しました")
+                    else:
+                        print(f"   ⚠️ {kw}: データ乖離過大のためスキップ（取得値: {median_price:,}円）")
+            
+            time.sleep(random.uniform(1.0, 3.0))
+            
+        except Exception as e:
+            print(f"   ❌ {kw} の相場データ取得に失敗: {e}")
+            continue
+            
+    db_obj["price_last_update"] = datetime.now(timezone(timedelta(hours=9))).strftime("%Y年%m月%d日 %H:%M")
+    print("📈 相場データの自己学習更新が正常完了しました！")
+    return db_obj
+
+# ---------------------------------------------------------------------
+# 6. 📊 利益計算ロジック（ダブル送料・手数料・ホワイトスニーカー対応）
 # ---------------------------------------------------------------------
 def calculate_profit(item, db_entry, keyword, condition_type, condition_label):
     title = item["title"]
@@ -398,6 +465,17 @@ def calculate_profit(item, db_entry, keyword, condition_type, condition_label):
         m_price = db_entry["condition_excellent"]
     else:
         m_price = db_entry["condition_good"]
+        
+    # 🔴 白・オールホワイトスニーカーは人気のため利益見込みを10%上乗せ（誤検知完全防止ロジックへアップグレード）
+    WHITE_NOISE_WORDS = ["面白い", "面白", "告白", "白木屋", "白川", "白紙", "余白", "白黒"]
+    is_white_sneaker = any(w in title for w in ["ホワイト", "WHITE", "white", "オールホワイト", "白色"])
+    if not is_white_sneaker and "白" in title:
+        # ノイズワードが含まれない場合のみ安全にTrueにする (新バグ①対策)
+        if not any(noise in title for noise in WHITE_NOISE_WORDS):
+            is_white_sneaker = True
+        
+    if is_white_sneaker and ("スニーカー" in keyword or "シューズ" in keyword or "靴" in keyword):
+        m_price = int(m_price * 1.1)
         
     mercari_fee = int(m_price * 0.10)
     m_shipping = db_entry["shipping_fee_est"]
@@ -416,6 +494,12 @@ def calculate_profit(item, db_entry, keyword, condition_type, condition_label):
     else:
         stars = "★★☆☆☆"
         
+    # 「やや傷や汚れあり」「傷や汚れあり」は、目視確認を促すフラグを立てる
+    needs_photo_check = condition_label in ["やや傷や汚れあり", "傷や汚れあり"]
+    
+    # 🔴 【改善4】「ソール修復・裏張り・リペア・補修・修理品」バッジ警告運用（新問題①対策・マージ）
+    needs_sole_warning = any(w in title for w in ["ソール張り替え", "裏張り", "ソールリペア", "リペア", "補修", "修理品", "ハーフソール"])
+    
     return {
         "title": title,
         "url": item["url"],
@@ -427,47 +511,61 @@ def calculate_profit(item, db_entry, keyword, condition_type, condition_label):
         "remaining_time": item["remaining_time"],
         "img_url": item["img_url"],
         "target_m_price": f"{m_price:,}円",
-        "time_m": item["time_m"]
+        "time_m": item["time_m"],
+        "needs_photo_check": needs_photo_check,
+        "is_white_sneaker": is_white_sneaker,
+        "needs_sole_warning": needs_sole_warning
     }
 
 # ---------------------------------------------------------------------
-# 6. メイン巡回処理（2段階検証・お行儀仕様）
+# 7. メイン巡回処理（2段階検証・お行儀＆高速化ハイブリッド仕様）
 # ---------------------------------------------------------------------
 def main():
+    global db
     all_bargains = []
     
-    print("🚀 【ストア厳格判定＆状態判定搭載】クローラーを起動します...")
+    print("🚀 【せどりAI OS 究極完全版】お宝検知エンジンを起動します...")
     
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(
+            headless=True,
+            args=["--disable-dev-shm-usage", "--no-sandbox", "--disable-gpu"]
+        )
         context = browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
             viewport={"width": 1920, "height": 1080}
         )
         page = context.new_page()
         
+        # 🔴 UTC基準による確実な深夜判定へ修正 (バグ②対策)
+        # JST 23:30 (夜間巡回) ＝ UTC 14:30 
+        now_utc = datetime.now(timezone.utc)
+        current_hour_utc = now_utc.hour
+        print(f"⏰ 現在のUTC時刻: {now_utc.strftime('%H:%M:%S')} (Hour UTC: {current_hour_utc})")
+        if 14 <= current_hour_utc <= 16:
+            db = update_market_prices_from_sold(page, db)
+        
         for i, (kw, entry) in enumerate(db["market_prices"].items()):
             if i > 0:
-                sleep_time = random.uniform(4.0, 8.0)
+                sleep_time = random.uniform(2.0, 4.0)
                 print(f"💤 サーバー負荷軽減のため、{sleep_time:.1f}秒待機します...")
                 time.sleep(sleep_time)
                 
             print(f"🔍 {kw} のヤフオク巡回を開始します...")
             
             encoded_kw = urllib.parse.quote(kw)
-            # URLパラメータに store=1 と is_store=1 の両方を乗せてフィルタの堅牢性を高める (問題①対策)
             url = f"https://auctions.yahoo.co.jp/search/search?p={encoded_kw}&is_store=1&store=1&istatus=1&istatus=3&istatus=4&istatus=5&price_type=currentprice&s1=end&o1=a"
             
             try:
-                page.goto(url, timeout=45000)
-                page.wait_for_timeout(3000)
+                page.goto(url, timeout=30000, wait_until="domcontentloaded")
+                time.sleep(1.5)  # 🔴 wait_for_timeoutを安全な time.sleep(1.5) に置換 (バグ①対策)
                 
                 html_content = page.content()
                 soup = BeautifulSoup(html_content, "html.parser")
                 products = soup.select(".Product")
                 
                 initial_candidates = []
-                for product in products[:25]:
+                for product in products[:15]:
                     try:
                         title_el = product.select_one(".Product__titleLink")
                         if not title_el:
@@ -511,11 +609,10 @@ def main():
                 # 🔍 【個別ページ詳細潜入調査】
                 scraped_count = 0
                 for item in initial_candidates:
-                    # 個別ページに潜入してストア確定検証 & 状態を100%の精度で取得
                     is_valid_store, exact_condition, cond_type = verify_store_and_get_condition(page, item["url"])
                     
                     if not is_valid_store:
-                        continue  # 個人出品や、判定が不十分なものはスキップして100%弾く
+                        continue
                         
                     result = calculate_profit(item, entry, kw, cond_type, exact_condition)
                     
@@ -526,7 +623,7 @@ def main():
                         all_bargains.append(result)
                         scraped_count += 1
                         
-                    time.sleep(1)
+                    time.sleep(0.5)
                     
                 print(f"   -> ストア確定 ＆ 基準合致商品を {scraped_count} 件検知しました")
                 
@@ -539,7 +636,7 @@ def main():
     all_bargains.sort(key=lambda x: x["expected_profit"], reverse=True)
     
     # JSONデータベースとして保存
-    db["last_update"] = datetime.now().strftime("%Y年%m月%d日 %H:%M")
+    db["last_update"] = datetime.now(timezone(timedelta(hours=9))).strftime("%Y年%m月%d日 %H:%M")
     db["latest_results"] = all_bargains
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(db, f, ensure_ascii=False, indent=2)
@@ -552,7 +649,7 @@ def main():
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Frontier Sedori OS - お宝自動検知</title>
     
-    <!-- 👑 Google AdSense 自動広告（ビネット・アンカー広告制御用） -->
+    <!-- 👑 Google AdSense 自動広告 -->
     {% if adsense_id %}
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{adsense_id}}" crossorigin="anonymous"></script>
     {% endif %}
@@ -778,7 +875,9 @@ def main():
             <button class="filter-btn" onclick="filterItems('ミュウミュウ シューズ')">ミュウミュウ靴</button>
             <button class="filter-btn" onclick="filterItems('セリーヌ シューズ')">セリーヌ靴</button>
             <button class="filter-btn" onclick="filterItems('バレンシアガ スニーカー')">バレンシアガ靴</button>
-            <button class="filter-btn" onclick="filterItems('ペリーコ シューズ')">ペリーコ靴</button>
+            <button class="filter-btn" onclick="filterItems('ペリーコ シューズ パンプス')">ペリーコ</button>
+            <button class="filter-btn" onclick="filterItems('ドルチェガッバーナ シューズ')">D&G靴</button>
+            <button class="filter-btn" onclick="filterItems('マイケルコース シューズ')">MK靴</button>
             <button class="filter-btn" onclick="filterItems('リーガル ローファー ビジネス')">リーガル</button>
             <button class="filter-btn" onclick="filterItems('ドクターマーチン ブーツ 3ホール')">マーチン</button>
             <button class="filter-btn" onclick="filterItems('レッドウィング ブーツ')">レッドウィング</button>
@@ -787,6 +886,7 @@ def main():
             <button class="filter-btn" onclick="filterItems('ナイキ スニーカー')">ナイキ</button>
             <button class="filter-btn" onclick="filterItems('アディダス スニーカー')">アディダス</button>
             <button class="filter-btn" onclick="filterItems('ニューバランス スニーカー')">ニューバランス</button>
+            <button class="filter-btn" onclick="filterItems('コンバース スニーカー')">コンバース</button>
         </div>
         
         <div class="grid" id="item-grid">
@@ -795,6 +895,22 @@ def main():
                 <div class="card" data-keyword="{{item.keyword}}">
                     <div class="card-img-wrapper">
                         <span class="badge">{{item.keyword}}</span>
+                        
+                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
+                        {% if item.needs_photo_check %}
+                        <span class="badge" style="top:40px; background-color:#d97706;">📸 要写真確認</span>
+                        {% endif %}
+                        
+                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
+                        {% if item.is_white_sneaker %}
+                        <span class="badge" style="top:70px; background-color:#6366f1;">⭐ ホワイト人気</span>
+                        {% endif %}
+                        
+                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
+                        {% if item.needs_sole_warning %}
+                        <span class="badge" style="top:100px; background-color:#10b981;">⚠️ ソール補修/裏張</span>
+                        {% endif %}
+                        
                         <img class="card-img" src="{{item.img_url}}" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
                     </div>
                     <div class="card-body">
