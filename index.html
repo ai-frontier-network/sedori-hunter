@@ -200,17 +200,115 @@
             min-height: 100px;
             width: 100%;
         }
+
+        /* 👑 イントロダクション（説明文）カードのデザイン */
+        .intro-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+        .intro-box h2 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            color: #0f172a;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 8px;
+            font-weight: 800;
+        }
+        .intro-box p {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .intro-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .intro-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 18px;
+        }
+        .intro-card h3 {
+            margin-top: 0;
+            font-size: 1.05rem;
+            color: #0f172a;
+            font-weight: 700;
+        }
+        .intro-card ul, .intro-card ol {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 0.88rem;
+            color: #334155;
+            line-height: 1.7;
+        }
+        .intro-card li {
+            margin-bottom: 8px;
+        }
+        .intro-card li:last-child {
+            margin-bottom: 0;
+        }
+        
     </style>
 </head>
 <body>
     <header>
         <h1>AI Frontier Sedori OS</h1>
-        <p>生活防衛・自立支援のための、高利益期待お宝自動検知プラットフォーム</p>
+        <p>高利益期待お宝自動検知プラットフォーム</p>
     </header>
     
     <div class="container">
-        <div class="update-time">最終更新: 2026年06月03日 14:30</div>
-        
+        <div class="update-time">最終更新: 2026年06月03日 15:34</div>
+
+        <!-- 👑 イントロダクション（説明文）ブロック -->
+        <div class="intro-box">
+            <h2>✨ AI Frontier Sedori OS へようこそ！</h2>
+            <p>このサイトは、24時間完全自動のお宝検知サイトです。維持費0円の最強インフラ（GHC × 独自ロジック）で稼働しています。</p>
+            
+            <div class="intro-grid">
+                <div class="intro-card">
+                    <h3>💡 このサイトのメリット</h3>
+                    <ul>
+                        <li><strong>ストア限定：</strong> トラブルや偽物のリスクが多い個人出品を完璧に排除。安全な「ストアアカウント」の優良案件のみを厳選。</li>
+                        <li><strong>ダブル送料＆手数料を自動計算：</strong> メルカリ手数料（10%）と、ダブル送料（ヤフオク仕入れ送料＋メルカリ発送送料）をあらかじめ自動で差し引いて、純粋な「手取り期待利益」を算出しています！</li>
+                        <li><strong>サイズ＆致命的欠陥の除外：</strong> 最も売れやすい「ゴールデンサイズ」のみを自動判定。ソール破れやカビなどのジャンク品は1次フィルターで徹底除外します。</li>
+                        <li><strong>お助け警告バッジ：</strong> 「📸要写真確認」「⭐ホワイト人気」「⚠️ソール補修/裏張」を自動解析して表示します。</li>
+                    </ul>
+                </div>
+                
+                <div class="intro-card">
+                    <h3>⚠️ ご利用時の注意点 ＆ 確認おすすめ時間</h3>
+                    <ul>
+                        <li><strong>相場は「目安」です：</strong> 表示されているメルカリ想定相場は、ヤフオクの過去の落札履歴（closedsearch）から実勢データを深夜に自動取得して補正した「目安の相場」です。実際の仕入れ時はリンク先からメルカリの現状もお確かめください。</li>
+                        <li><strong>最後は人の目で！：</strong> ヤフオクストアはクレーム防止のために状態を低く（やや汚れあり等）申告することが多いです。「📸要写真確認」バッジを目印に、実物が綺麗な状態であれば大チャンスです！</li>
+                        <li><strong>🎯 1日2回の「お宝チェック時間」：</strong> 
+                            自動更新は毎日<strong>【お昼 12:30以降】</strong>と<strong>【深夜 24:30（0:30）以降】</strong>に完了します。ヤフオクは夜21時〜23時台に終了する商品が多いため、特に<strong>【深夜 0:30〜1:00頃】</strong>にチェックすると、ライバルが見落としている当日終了の大本命お宝を一番美味しいタイミングでハントできると思います！
+                        </li>
+                    </ul>
+                </div>
+                </div>
+
+            <div class="intro-card" style="margin-top: 15px; background: #0f172a; color: white;">
+                <h3 style="color: white; margin-top:0; margin-bottom: 10px;">🎯 かんたん3ステップの使い方</h3>
+                <ol style="margin-bottom:0; padding-left:20px; color: #cbd5e1;">
+                    <li>下の<strong>「フィルターボタン」</strong>を押して、得意なブランドを絞り込みます。</li>
+                    <li>利益期待値が高く、星マーク（★★★★★）が多いお宝商品を探します。</li>
+                    <li>「ヤフオクで商品を見る」ボタンを押し、写真を確認して綺麗な状態であれば仕入れを行い、メルカリで販売します！</li>
+                </ol>
+            </div>
+        </div>
+      
         <div class="filter-buttons">
             <button class="filter-btn active" onclick="filterItems('all')">すべて表示</button>
             <button class="filter-btn" onclick="filterItems('フルラ 財布')">フルラ 財布</button>
@@ -270,7 +368,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">9時間</span>
+                                <span class="metric-val" style="color: #059669;">8時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -291,58 +389,6 @@
                         </div>
                         
                         <a href="https://auctions.yahoo.co.jp/jp/auction/e1175214348" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
-                    </div>
-                </div>
-                
-                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
-                
-                
-                
-                <div class="card" data-keyword="クリスチャンルブタン シューズ">
-                    <div class="card-img-wrapper">
-                        <span class="badge">クリスチャンルブタン シューズ</span>
-                        
-                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
-                        
-                        
-                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
-                        
-                        <span class="badge" style="top:70px; background-color:#6366f1;">⭐ ホワイト人気</span>
-                        
-                        
-                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
-                        
-                        
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0205/user/a17dd56b8ac5b12557f8bfbffe94125fe72b9c80c20dc5a437911e1a37442081/i-img1000x1000-17792450799787lnzjgd36.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
-                    </div>
-                    <div class="card-body">
-                        <div class="stars">★★★★★</div>
-                        <h3 class="title">Christian Louboutin クリスチャンルブタン カーフレザー×スエード スニーカー シューズ メンズ ホワイト/レッド 41 1/2</h3>
-                        
-                        <div class="metrics">
-                            <div class="metric-row">
-                                <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">11分</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">27,390円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">71,500円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">商品の状態</span>
-                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">未使用に近い</span>
-                            </div>
-                            <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
-                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
-                                <span class="profit">35,110円</span>
-                            </div>
-                        </div>
-                        
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/x1230534515" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -374,7 +420,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">8時間</span>
+                                <span class="metric-val" style="color: #059669;">7時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -399,17 +445,6 @@
                 </div>
                 
                 <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
-                
-                <div class="adsense-container">
-                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2908004621823900" crossorigin="anonymous"></script>
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-format="fluid"
-                         data-ad-layout-key="-fb+5w+4e-db+86"
-                         data-ad-client="ca-pub-2908004621823900"
-                         data-ad-slot="3799886389"></ins>
-                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                </div>
                 
                 
                 
@@ -437,7 +472,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">9時間</span>
+                                <span class="metric-val" style="color: #059669;">8時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -462,6 +497,17 @@
                 </div>
                 
                 <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
+                
+                <div class="adsense-container">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2908004621823900" crossorigin="anonymous"></script>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-format="fluid"
+                         data-ad-layout-key="-fb+5w+4e-db+86"
+                         data-ad-client="ca-pub-2908004621823900"
+                         data-ad-slot="3799886389"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </div>
                 
                 
                 
@@ -489,7 +535,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">5時間</span>
+                                <span class="metric-val" style="color: #059669;">4時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -539,7 +585,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">8時間</span>
+                                <span class="metric-val" style="color: #059669;">7時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -591,7 +637,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">9時間</span>
+                                <span class="metric-val" style="color: #059669;">7時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -643,7 +689,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">4時間</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -693,7 +739,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">9時間</span>
+                                <span class="metric-val" style="color: #059669;">8時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -736,16 +782,16 @@
                         <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
                         
                         
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0204/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17749867411793v4y3uf14876.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
+                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0201/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-176827650614512osvmo771.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
                     </div>
                     <div class="card-body">
                         <div class="stars">★★★★★</div>
-                        <h3 class="title">Christian Louboutin◆使用感有/パンプス/36.5/BLK/スウェード//</h3>
+                        <h3 class="title">Christian Louboutin◆パンプス/36/BLK/スウェード</h3>
                         
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">59分13秒</span>
+                                <span class="metric-val" style="color: #059669;">40分53秒</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -765,7 +811,7 @@
                             </div>
                         </div>
                         
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/d1224912600" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
+                        <a href="https://auctions.yahoo.co.jp/jp/auction/w1215770072" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -788,16 +834,16 @@
                         <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
                         
                         
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0201/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-176827650614512osvmo771.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
+                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0202/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17714623596282hfpgpz54272.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
                     </div>
                     <div class="card-body">
                         <div class="stars">★★★★★</div>
-                        <h3 class="title">Christian Louboutin◆パンプス/36/BLK/スウェード</h3>
+                        <h3 class="title">Christian Louboutin◆パンプス/35/GRY/エナメル//</h3>
                         
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">2時間</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -817,7 +863,7 @@
                             </div>
                         </div>
                         
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/w1215770072" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
+                        <a href="https://auctions.yahoo.co.jp/jp/auction/s1220142786" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -849,7 +895,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">3時間</span>
+                                <span class="metric-val" style="color: #059669;">2時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -903,7 +949,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">9時間</span>
+                                <span class="metric-val" style="color: #059669;">8時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -955,7 +1001,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">2時間</span>
+                                <span class="metric-val" style="color: #059669;">51分42秒</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -1007,7 +1053,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">2時間</span>
+                                <span class="metric-val" style="color: #059669;">56分43秒</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -1028,162 +1074,6 @@
                         </div>
                         
                         <a href="https://auctions.yahoo.co.jp/jp/auction/e1219885664" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
-                    </div>
-                </div>
-                
-                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
-                
-                
-                
-                <div class="card" data-keyword="クリスチャンルブタン シューズ">
-                    <div class="card-img-wrapper">
-                        <span class="badge">クリスチャンルブタン シューズ</span>
-                        
-                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
-                        
-                        <span class="badge" style="top:40px; background-color:#d97706;">📸 要写真確認</span>
-                        
-                        
-                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
-                        
-                        
-                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
-                        
-                        
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0109/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17585761733694prrucy503619.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
-                    </div>
-                    <div class="card-body">
-                        <div class="stars">★★★★★</div>
-                        <h3 class="title">Christian Louboutin◆デッキシューズ/40.5/BRW</h3>
-                        
-                        <div class="metrics">
-                            <div class="metric-row">
-                                <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">42分2秒</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">10,560円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">32,000円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">商品の状態</span>
-                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">やや傷や汚れあり</span>
-                            </div>
-                            <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
-                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
-                                <span class="profit">16,390円</span>
-                            </div>
-                        </div>
-                        
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/t1201188792" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
-                    </div>
-                </div>
-                
-                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
-                
-                
-                
-                <div class="card" data-keyword="サンローラン シューズ">
-                    <div class="card-img-wrapper">
-                        <span class="badge">サンローラン シューズ</span>
-                        
-                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
-                        
-                        <span class="badge" style="top:40px; background-color:#d97706;">📸 要写真確認</span>
-                        
-                        
-                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
-                        
-                        
-                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
-                        
-                        
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0112/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-176653093038722zigk533.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
-                    </div>
-                    <div class="card-body">
-                        <div class="stars">★★★★★</div>
-                        <h3 class="title">YVES SAINT LAURENT◆パンプス/35</h3>
-                        
-                        <div class="metrics">
-                            <div class="metric-row">
-                                <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">40分39秒</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">5,060円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">25,000円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">商品の状態</span>
-                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">やや傷や汚れあり</span>
-                            </div>
-                            <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
-                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
-                                <span class="profit">15,590円</span>
-                            </div>
-                        </div>
-                        
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/t1213522314" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
-                    </div>
-                </div>
-                
-                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
-                
-                
-                
-                <div class="card" data-keyword="サンローラン シューズ">
-                    <div class="card-img-wrapper">
-                        <span class="badge">サンローラン シューズ</span>
-                        
-                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
-                        
-                        <span class="badge" style="top:40px; background-color:#d97706;">📸 要写真確認</span>
-                        
-                        
-                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
-                        
-                        
-                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
-                        
-                        
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0202/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17701646141477ncrbzh34.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
-                    </div>
-                    <div class="card-body">
-                        <div class="stars">★★★★★</div>
-                        <h3 class="title">YVES SAINT LAURENT◆パンプス/35/CRM</h3>
-                        
-                        <div class="metrics">
-                            <div class="metric-row">
-                                <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">56分25秒</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">5,060円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">25,000円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">商品の状態</span>
-                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">やや傷や汚れあり</span>
-                            </div>
-                            <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
-                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
-                                <span class="profit">15,590円</span>
-                            </div>
-                        </div>
-                        
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/m1218398538" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -1215,7 +1105,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">2時間</span>
+                                <span class="metric-val" style="color: #059669;">5分</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -1267,7 +1157,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">4時間</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -1319,7 +1209,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">5時間</span>
+                                <span class="metric-val" style="color: #059669;">4時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -1371,7 +1261,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">2時間</span>
+                                <span class="metric-val" style="color: #059669;">3分7秒</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -1423,7 +1313,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">2時間</span>
+                                <span class="metric-val" style="color: #059669;">48分54秒</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -1451,9 +1341,9 @@
                 
                 
                 
-                <div class="card" data-keyword="クリスチャンルブタン シューズ">
+                <div class="card" data-keyword="セリーヌ シューズ">
                     <div class="card-img-wrapper">
-                        <span class="badge">クリスチャンルブタン シューズ</span>
+                        <span class="badge">セリーヌ シューズ</span>
                         
                         <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
                         
@@ -1466,24 +1356,24 @@
                         <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
                         
                         
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0203/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17743977311245pcnjy01003.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
+                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0508/users/0e7b7992c7a2872510a12dbcb0110c3b5774e212/i-img900x1200-1722897297ds8glo153437.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
                     </div>
                     <div class="card-body">
                         <div class="stars">★★★★★</div>
-                        <h3 class="title">Christian Louboutin◆底面剥がれ有/ハイヒール/パンプス/36/CLR</h3>
+                        <h3 class="title">CELINE◆袋付/サンダル/37.5/オレンジ/セリーヌ</h3>
                         
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">37分33秒</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">12,760円</span>
+                                <span class="metric-val">6,160円</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">32,000円</span>
+                                <span class="metric-val">24,000円</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">商品の状態</span>
@@ -1491,63 +1381,11 @@
                             </div>
                             <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
                                 <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
-                                <span class="profit">14,190円</span>
+                                <span class="profit">13,590円</span>
                             </div>
                         </div>
                         
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/e1224092949" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
-                    </div>
-                </div>
-                
-                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
-                
-                
-                
-                <div class="card" data-keyword="プラダ スニーカー シューズ">
-                    <div class="card-img-wrapper">
-                        <span class="badge">プラダ スニーカー シューズ</span>
-                        
-                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
-                        
-                        <span class="badge" style="top:40px; background-color:#d97706;">📸 要写真確認</span>
-                        
-                        
-                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
-                        
-                        
-                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
-                        
-                        
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0102/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17396183701271gwo39w76873.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
-                    </div>
-                    <div class="card-body">
-                        <div class="stars">★★★★★</div>
-                        <h3 class="title">PRADA◆ハイカットスニーカー/6/BLK/レザー/4T2149</h3>
-                        
-                        <div class="metrics">
-                            <div class="metric-row">
-                                <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">2分26秒</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">9,460円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">28,000円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">商品の状態</span>
-                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">やや傷や汚れあり</span>
-                            </div>
-                            <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
-                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
-                                <span class="profit">13,890円</span>
-                            </div>
-                        </div>
-                        
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/s1173576688" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
+                        <a href="https://auctions.yahoo.co.jp/jp/auction/g1147614231" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -1579,7 +1417,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">4時間</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -1600,6 +1438,58 @@
                         </div>
                         
                         <a href="https://auctions.yahoo.co.jp/jp/auction/j1142679064" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
+                    </div>
+                </div>
+                
+                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
+                
+                
+                
+                <div class="card" data-keyword="サンローラン シューズ">
+                    <div class="card-img-wrapper">
+                        <span class="badge">サンローラン シューズ</span>
+                        
+                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
+                        
+                        <span class="badge" style="top:40px; background-color:#d97706;">📸 要写真確認</span>
+                        
+                        
+                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
+                        
+                        
+                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
+                        
+                        
+                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0205/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17786287565356i8buai663330.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
+                    </div>
+                    <div class="card-body">
+                        <div class="stars">★★★★★</div>
+                        <h3 class="title">YVES SAINT LAURENT◆パンプス/36.5/BLK//</h3>
+                        
+                        <div class="metrics">
+                            <div class="metric-row">
+                                <span class="metric-label">残り時間</span>
+                                <span class="metric-val" style="color: #059669;">5時間</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">ヤフオク現在価格</span>
+                                <span class="metric-val">7,260円</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">メルカリ想定相場</span>
+                                <span class="metric-val">25,000円</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">商品の状態</span>
+                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">やや傷や汚れあり</span>
+                            </div>
+                            <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
+                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
+                                <span class="profit">13,390円</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://auctions.yahoo.co.jp/jp/auction/w1229718610" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -1631,7 +1521,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">3時間</span>
+                                <span class="metric-val" style="color: #059669;">2時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -1683,7 +1573,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">5時間</span>
+                                <span class="metric-val" style="color: #059669;">4時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -1733,7 +1623,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">9時間</span>
+                                <span class="metric-val" style="color: #059669;">8時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -1785,7 +1675,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">2時間</span>
+                                <span class="metric-val" style="color: #059669;">29分54秒</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -1837,7 +1727,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">4時間</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -1858,6 +1748,58 @@
                         </div>
                         
                         <a href="https://auctions.yahoo.co.jp/jp/auction/t1173974508" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
+                    </div>
+                </div>
+                
+                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
+                
+                
+                
+                <div class="card" data-keyword="ボッテガヴェネタ シューズ">
+                    <div class="card-img-wrapper">
+                        <span class="badge">ボッテガヴェネタ シューズ</span>
+                        
+                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
+                        
+                        <span class="badge" style="top:40px; background-color:#d97706;">📸 要写真確認</span>
+                        
+                        
+                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
+                        
+                        
+                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
+                        
+                        
+                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0107/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17518458173005grkbnh264507.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
+                    </div>
+                    <div class="card-body">
+                        <div class="stars">★★★★★</div>
+                        <h3 class="title">BOTTEGA VENETA◆ヒールパンプス/スクエアオープントゥ/チャンキーヒール/35.5/BRW/羊革/VBP402113</h3>
+                        
+                        <div class="metrics">
+                            <div class="metric-row">
+                                <span class="metric-label">残り時間</span>
+                                <span class="metric-val" style="color: #059669;">4時間</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">ヤフオク現在価格</span>
+                                <span class="metric-val">12,760円</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">メルカリ想定相場</span>
+                                <span class="metric-val">30,000円</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">商品の状態</span>
+                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">やや傷や汚れあり</span>
+                            </div>
+                            <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
+                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
+                                <span class="profit">12,390円</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://auctions.yahoo.co.jp/jp/auction/e1191627714" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -1889,7 +1831,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">3時間</span>
+                                <span class="metric-val" style="color: #059669;">2時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -1917,9 +1859,9 @@
                 
                 
                 
-                <div class="card" data-keyword="セリーヌ シューズ">
+                <div class="card" data-keyword="クリスチャンルブタン シューズ">
                     <div class="card-img-wrapper">
-                        <span class="badge">セリーヌ シューズ</span>
+                        <span class="badge">クリスチャンルブタン シューズ</span>
                         
                         <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
                         
@@ -1932,24 +1874,24 @@
                         <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
                         
                         
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0108/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-175482783545962oubsy35.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
+                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0108/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-175435591919995nb3nh37279.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
                     </div>
                     <div class="card-body">
                         <div class="stars">★★★★★</div>
-                        <h3 class="title">CELINE◆エスパドリーユ/35/BLK/レザー//</h3>
+                        <h3 class="title">Christian Louboutin◆パンプス/36/BLK</h3>
                         
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">24分20秒</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">8,360円</span>
+                                <span class="metric-val">14,960円</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">24,000円</span>
+                                <span class="metric-val">32,000円</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">商品の状態</span>
@@ -1957,11 +1899,11 @@
                             </div>
                             <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
                                 <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
-                                <span class="profit">11,390円</span>
+                                <span class="profit">11,990円</span>
                             </div>
                         </div>
                         
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/r1195904577" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
+                        <a href="https://auctions.yahoo.co.jp/jp/auction/f1195239684" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -1993,7 +1935,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">3時間</span>
+                                <span class="metric-val" style="color: #059669;">2時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -2045,7 +1987,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">4時間</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -2097,7 +2039,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">2時間</span>
+                                <span class="metric-val" style="color: #059669;">37分15秒</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -2149,7 +2091,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">3時間</span>
+                                <span class="metric-val" style="color: #059669;">2時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -2201,7 +2143,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">4時間</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -2253,7 +2195,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">3時間</span>
+                                <span class="metric-val" style="color: #059669;">2時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -2274,6 +2216,58 @@
                         </div>
                         
                         <a href="https://auctions.yahoo.co.jp/jp/auction/x1229758846" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
+                    </div>
+                </div>
+                
+                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
+                
+                
+                
+                <div class="card" data-keyword="クリスチャンルブタン シューズ">
+                    <div class="card-img-wrapper">
+                        <span class="badge">クリスチャンルブタン シューズ</span>
+                        
+                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
+                        
+                        <span class="badge" style="top:40px; background-color:#d97706;">📸 要写真確認</span>
+                        
+                        
+                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
+                        
+                        
+                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
+                        
+                        
+                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0111/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17629064151320xauv3i9235.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
+                    </div>
+                    <div class="card-body">
+                        <div class="stars">★★★★★</div>
+                        <h3 class="title">Christian Louboutin◆ローファー/42/BRD/ベロア</h3>
+                        
+                        <div class="metrics">
+                            <div class="metric-row">
+                                <span class="metric-label">残り時間</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">ヤフオク現在価格</span>
+                                <span class="metric-val">17,160円</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">メルカリ想定相場</span>
+                                <span class="metric-val">32,000円</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">商品の状態</span>
+                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">やや傷や汚れあり</span>
+                            </div>
+                            <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
+                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
+                                <span class="profit">9,790円</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://auctions.yahoo.co.jp/jp/auction/u1207506726" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -2303,7 +2297,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">3時間</span>
+                                <span class="metric-val" style="color: #059669;">2時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -2331,9 +2325,9 @@
                 
                 
                 
-                <div class="card" data-keyword="セリーヌ シューズ">
+                <div class="card" data-keyword="バレンシアガ スニーカー">
                     <div class="card-img-wrapper">
-                        <span class="badge">セリーヌ シューズ</span>
+                        <span class="badge">バレンシアガ スニーカー</span>
                         
                         <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
                         
@@ -2342,22 +2336,20 @@
                         
                         <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
                         
-                        <span class="badge" style="top:70px; background-color:#6366f1;">⭐ ホワイト人気</span>
-                        
                         
                         <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
                         
                         
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0107/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17524401223199balzpj45724.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
+                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0204/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17755992916230uepza5783.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
                     </div>
                     <div class="card-body">
                         <div class="stars">★★★★★</div>
-                        <h3 class="title">CELINE◆Large Band Sandal/サンダル/36/ホワイト/レザー/スレ有/使用感有</h3>
+                        <h3 class="title">BALENCIAGA◆ローカットスニーカー/41/GRY//</h3>
                         
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">44分18秒</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -2365,7 +2357,7 @@
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">26,400円</span>
+                                <span class="metric-val">26,000円</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">商品の状態</span>
@@ -2373,63 +2365,11 @@
                             </div>
                             <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
                                 <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
-                                <span class="profit">9,150円</span>
+                                <span class="profit">8,790円</span>
                             </div>
                         </div>
                         
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/k1192512283" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
-                    </div>
-                </div>
-                
-                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
-                
-                
-                
-                <div class="card" data-keyword="ミュウミュウ シューズ">
-                    <div class="card-img-wrapper">
-                        <span class="badge">ミュウミュウ シューズ</span>
-                        
-                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
-                        
-                        <span class="badge" style="top:40px; background-color:#d97706;">📸 要写真確認</span>
-                        
-                        
-                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
-                        
-                        
-                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
-                        
-                        
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0205/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-177984100651809nnuvc4139.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
-                    </div>
-                    <div class="card-body">
-                        <div class="stars">★★★★★</div>
-                        <h3 class="title">MIU MIU◆パンプス/37.5/BRW/レザー//</h3>
-                        
-                        <div class="metrics">
-                            <div class="metric-row">
-                                <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">56分33秒</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">9,460円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">22,000円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">商品の状態</span>
-                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">やや傷や汚れあり</span>
-                            </div>
-                            <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
-                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
-                                <span class="profit">8,490円</span>
-                            </div>
-                        </div>
-                        
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/v1231350613" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
+                        <a href="https://auctions.yahoo.co.jp/jp/auction/l1225724204" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -2461,7 +2401,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">4時間</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -2513,7 +2453,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">2時間</span>
+                                <span class="metric-val" style="color: #059669;">6分3秒</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -2556,16 +2496,16 @@
                         <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
                         
                         
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0204/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17750378701757vhydta18719.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
+                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0205/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-1779830836582211vey64903.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
                     </div>
                     <div class="card-body">
                         <div class="stars">★★★★★</div>
-                        <h3 class="title">PRADA◆ローカットスニーカー/35.5/KHK/カモフラ/3E6388</h3>
+                        <h3 class="title">PRADA◆ローカットスニーカー/35.5/BLK/ナイロン//</h3>
                         
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">32分35秒</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -2585,7 +2525,7 @@
                             </div>
                         </div>
                         
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/b1224996108" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
+                        <a href="https://auctions.yahoo.co.jp/jp/auction/p1231333455" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -2608,16 +2548,16 @@
                         <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
                         
                         
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0205/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-1779830836582211vey64903.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
+                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0109/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17587545842477twh6wi18379.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
                     </div>
                     <div class="card-body">
                         <div class="stars">★★★★★</div>
-                        <h3 class="title">PRADA◆ローカットスニーカー/35.5/BLK/ナイロン//</h3>
+                        <h3 class="title">PRADA SPORT◆レザースリッポン/ローカットスニーカー/UK8/WHT/レザー/2991</h3>
                         
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">4時間</span>
+                                <span class="metric-val" style="color: #059669;">5時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -2637,7 +2577,7 @@
                             </div>
                         </div>
                         
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/p1231333455" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
+                        <a href="https://auctions.yahoo.co.jp/jp/auction/1201421681" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -2669,7 +2609,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">2時間</span>
+                                <span class="metric-val" style="color: #059669;">29分38秒</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -2721,7 +2661,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">2時間</span>
+                                <span class="metric-val" style="color: #059669;">8分53秒</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -2775,7 +2715,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">4時間</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -2796,56 +2736,6 @@
                         </div>
                         
                         <a href="https://auctions.yahoo.co.jp/jp/auction/f1225762686" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
-                    </div>
-                </div>
-                
-                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
-                
-                
-                
-                <div class="card" data-keyword="フルラ バッグ">
-                    <div class="card-img-wrapper">
-                        <span class="badge">フルラ バッグ</span>
-                        
-                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
-                        
-                        
-                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
-                        
-                        
-                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
-                        
-                        
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0111/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17621271179954qdbxl291679.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
-                    </div>
-                    <div class="card-body">
-                        <div class="stars">★★★★★</div>
-                        <h3 class="title">FURLA◆ショルダーバッグ/レザー/BEG</h3>
-                        
-                        <div class="metrics">
-                            <div class="metric-row">
-                                <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">2分2秒</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">3,300円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">14,000円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">商品の状態</span>
-                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">未使用に近い / サイズ: 判定不要</span>
-                            </div>
-                            <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
-                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
-                                <span class="profit">7,450円</span>
-                            </div>
-                        </div>
-                        
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/h1206402576" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -2877,7 +2767,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">3時間</span>
+                                <span class="metric-val" style="color: #059669;">2時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -2929,7 +2819,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">4時間</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -2950,6 +2840,58 @@
                         </div>
                         
                         <a href="https://auctions.yahoo.co.jp/jp/auction/l1205734519" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
+                    </div>
+                </div>
+                
+                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
+                
+                
+                
+                <div class="card" data-keyword="セリーヌ シューズ">
+                    <div class="card-img-wrapper">
+                        <span class="badge">セリーヌ シューズ</span>
+                        
+                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
+                        
+                        <span class="badge" style="top:40px; background-color:#d97706;">📸 要写真確認</span>
+                        
+                        
+                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
+                        
+                        
+                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
+                        
+                        
+                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0106/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17488143454983p9hb1p69250.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
+                    </div>
+                    <div class="card-body">
+                        <div class="stars">★★★★★</div>
+                        <h3 class="title">CELINE◆パンプス/36/ブラック/レザー/スタッズ</h3>
+                        
+                        <div class="metrics">
+                            <div class="metric-row">
+                                <span class="metric-label">残り時間</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">ヤフオク現在価格</span>
+                                <span class="metric-val">12,760円</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">メルカリ想定相場</span>
+                                <span class="metric-val">24,000円</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">商品の状態</span>
+                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">やや傷や汚れあり</span>
+                            </div>
+                            <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
+                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
+                                <span class="profit">6,990円</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://auctions.yahoo.co.jp/jp/auction/h1187166866" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -2981,7 +2923,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">3時間</span>
+                                <span class="metric-val" style="color: #059669;">2時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -3033,7 +2975,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">7時間</span>
+                                <span class="metric-val" style="color: #059669;">6時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -3085,7 +3027,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">3時間</span>
+                                <span class="metric-val" style="color: #059669;">2時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -3137,7 +3079,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">6時間</span>
+                                <span class="metric-val" style="color: #059669;">5時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -3189,7 +3131,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">6時間</span>
+                                <span class="metric-val" style="color: #059669;">5時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -3241,7 +3183,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">2時間</span>
+                                <span class="metric-val" style="color: #059669;">24分17秒</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -3293,7 +3235,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">3時間</span>
+                                <span class="metric-val" style="color: #059669;">2時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -3314,6 +3256,56 @@
                         </div>
                         
                         <a href="https://auctions.yahoo.co.jp/jp/auction/f1230533332" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
+                    </div>
+                </div>
+                
+                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
+                
+                
+                
+                <div class="card" data-keyword="フルラ バッグ">
+                    <div class="card-img-wrapper">
+                        <span class="badge">フルラ バッグ</span>
+                        
+                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
+                        
+                        
+                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
+                        
+                        
+                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
+                        
+                        
+                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0202/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17701658958233hlddiv218.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
+                    </div>
+                    <div class="card-body">
+                        <div class="stars">★★★★★</div>
+                        <h3 class="title">FURLA◆トートバッグ/-/PNK/F5448</h3>
+                        
+                        <div class="metrics">
+                            <div class="metric-row">
+                                <span class="metric-label">残り時間</span>
+                                <span class="metric-val" style="color: #059669;">6分36秒</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">ヤフオク現在価格</span>
+                                <span class="metric-val">5,060円</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">メルカリ想定相場</span>
+                                <span class="metric-val">14,000円</span>
+                            </div>
+                            <div class="metric-row">
+                                <span class="metric-label">商品の状態</span>
+                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">未使用に近い / サイズ: 判定不要</span>
+                            </div>
+                            <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
+                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
+                                <span class="profit">5,690円</span>
+                            </div>
+                        </div>
+                        
+                        <a href="https://auctions.yahoo.co.jp/jp/auction/x1218394643" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -3343,7 +3335,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">8時間</span>
+                                <span class="metric-val" style="color: #059669;">7時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -3447,7 +3439,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">9時間</span>
+                                <span class="metric-val" style="color: #059669;">8時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -3499,7 +3491,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">4時間</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -3705,7 +3697,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">3時間</span>
+                                <span class="metric-val" style="color: #059669;">2時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -3748,58 +3740,6 @@
                         <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
                         
                         
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0204/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17762112541241f31mun113134.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
-                    </div>
-                    <div class="card-body">
-                        <div class="stars">★★★★☆</div>
-                        <h3 class="title">Christian Louboutin◆シューズ/-/BLK</h3>
-                        
-                        <div class="metrics">
-                            <div class="metric-row">
-                                <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">17分30秒</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">22,660円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">32,000円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">商品の状態</span>
-                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">やや傷や汚れあり</span>
-                            </div>
-                            <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
-                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
-                                <span class="profit">4,290円</span>
-                            </div>
-                        </div>
-                        
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/c1226569395" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
-                    </div>
-                </div>
-                
-                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
-                
-                
-                
-                <div class="card" data-keyword="クリスチャンルブタン シューズ">
-                    <div class="card-img-wrapper">
-                        <span class="badge">クリスチャンルブタン シューズ</span>
-                        
-                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
-                        
-                        <span class="badge" style="top:40px; background-color:#d97706;">📸 要写真確認</span>
-                        
-                        
-                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
-                        
-                        
-                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
-                        
-                        
                         <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0203/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-177382933135671ioyai38406.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
                     </div>
                     <div class="card-body">
@@ -3809,7 +3749,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">3時間</span>
+                                <span class="metric-val" style="color: #059669;">2時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -3861,7 +3801,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">4時間</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -3941,13 +3881,11 @@
                 
                 
                 
-                <div class="card" data-keyword="フェラガモ パンプス シューズ">
+                <div class="card" data-keyword="ペリーコ シューズ パンプス">
                     <div class="card-img-wrapper">
-                        <span class="badge">フェラガモ パンプス シューズ</span>
+                        <span class="badge">ペリーコ シューズ パンプス</span>
                         
                         <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
-                        
-                        <span class="badge" style="top:40px; background-color:#d97706;">📸 要写真確認</span>
                         
                         
                         <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
@@ -3956,140 +3894,36 @@
                         <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
                         
                         
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0511/user/21d0d1964a30a30423e9ded3671edd0609d36cd6bcd81ffaff1d461d8a82b700/i-img1024x768-17313158709756ikocoh67014.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
+                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0205/user/22d6590592d57f68549f01d7a62a042477caaa560e3b996e7c7100793358afc9/i-img600x600-17799731757045rcnljt125772.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
                     </div>
                     <div class="card-body">
                         <div class="stars">★★★★☆</div>
-                        <h3 class="title">サルヴァトーレフェラガモ Salvatore Ferragamo SEMPIONE　リボン　ヴァラ　レザーパンプス ・6 kz4822217024</h3>
+                        <h3 class="title">PELLICO SUNNY スエード フラットシューズ size37 ピンク シャンパンゴールド ペリーコ サニー</h3>
                         
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">8分3秒</span>
+                                <span class="metric-val" style="color: #059669;">7時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">1,782円</span>
+                                <span class="metric-val">5,500円</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">8,000円</span>
+                                <span class="metric-val">12,000円</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">商品の状態</span>
-                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">やや傷や汚れあり</span>
+                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">未使用に近い</span>
                             </div>
                             <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
                                 <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
-                                <span class="profit">3,568円</span>
+                                <span class="profit">3,450円</span>
                             </div>
                         </div>
                         
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/g1160741657" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
-                    </div>
-                </div>
-                
-                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
-                
-                
-                
-                <div class="card" data-keyword="グッチ スニーカー シューズ">
-                    <div class="card-img-wrapper">
-                        <span class="badge">グッチ スニーカー シューズ</span>
-                        
-                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
-                        
-                        <span class="badge" style="top:40px; background-color:#d97706;">📸 要写真確認</span>
-                        
-                        
-                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
-                        
-                        
-                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
-                        
-                        
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0102/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17393369030400bhtewu867.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
-                    </div>
-                    <div class="card-body">
-                        <div class="stars">★★★★☆</div>
-                        <h3 class="title">GUCCI◆GG柄ハイカットスニーカー/36.5/WHT/キャンバス/426186</h3>
-                        
-                        <div class="metrics">
-                            <div class="metric-row">
-                                <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">11分59秒</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">12,760円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">20,000円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">商品の状態</span>
-                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">やや傷や汚れあり</span>
-                            </div>
-                            <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
-                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
-                                <span class="profit">3,390円</span>
-                            </div>
-                        </div>
-                        
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/b1173149377" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
-                    </div>
-                </div>
-                
-                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
-                
-                
-                
-                <div class="card" data-keyword="プラダ スニーカー シューズ">
-                    <div class="card-img-wrapper">
-                        <span class="badge">プラダ スニーカー シューズ</span>
-                        
-                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
-                        
-                        <span class="badge" style="top:40px; background-color:#d97706;">📸 要写真確認</span>
-                        
-                        
-                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
-                        
-                        
-                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
-                        
-                        
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0202/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17701862332084uq352l149583.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
-                    </div>
-                    <div class="card-body">
-                        <div class="stars">★★★☆☆</div>
-                        <h3 class="title">PRADA◆ローカットスニーカー/-/BLK//</h3>
-                        
-                        <div class="metrics">
-                            <div class="metric-row">
-                                <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">15分47秒</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">20,460円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">28,000円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">商品の状態</span>
-                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">やや傷や汚れあり</span>
-                            </div>
-                            <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
-                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
-                                <span class="profit">2,890円</span>
-                            </div>
-                        </div>
-                        
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/w1218454651" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
+                        <a href="https://auctions.yahoo.co.jp/jp/auction/r1231557233" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -4121,7 +3955,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">3時間</span>
+                                <span class="metric-val" style="color: #059669;">2時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -4173,7 +4007,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">4時間</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -4201,11 +4035,13 @@
                 
                 
                 
-                <div class="card" data-keyword="フルラ 財布">
+                <div class="card" data-keyword="プラダ スニーカー シューズ">
                     <div class="card-img-wrapper">
-                        <span class="badge">フルラ 財布</span>
+                        <span class="badge">プラダ スニーカー シューズ</span>
                         
                         <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
+                        
+                        <span class="badge" style="top:40px; background-color:#d97706;">📸 要写真確認</span>
                         
                         
                         <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
@@ -4214,36 +4050,36 @@
                         <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
                         
                         
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0202/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-177197746282986q609k37599.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
+                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0201/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17690320044228oqlmvr48896.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
                     </div>
                     <div class="card-body">
                         <div class="stars">★★★☆☆</div>
-                        <h3 class="title">FURLA◆長財布/-/総柄/レディース</h3>
+                        <h3 class="title">PRADA◆ローカットスニーカー/UK7.5/BLK</h3>
                         
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">19分30秒</span>
+                                <span class="metric-val" style="color: #059669;">5時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">6,160円</span>
+                                <span class="metric-val">20,460円</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">11,000円</span>
+                                <span class="metric-val">28,000円</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">商品の状態</span>
-                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">未使用に近い / サイズ: 判定不要</span>
+                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">やや傷や汚れあり</span>
                             </div>
                             <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
                                 <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
-                                <span class="profit">2,870円</span>
+                                <span class="profit">2,890円</span>
                             </div>
                         </div>
                         
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/d1220824636" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
+                        <a href="https://auctions.yahoo.co.jp/jp/auction/1216819659" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -4275,7 +4111,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">2時間</span>
+                                <span class="metric-val" style="color: #059669;">52分58秒</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -4303,9 +4139,9 @@
                 
                 
                 
-                <div class="card" data-keyword="コールハーン シューズ">
+                <div class="card" data-keyword="ボッテガヴェネタ シューズ">
                     <div class="card-img-wrapper">
-                        <span class="badge">コールハーン シューズ</span>
+                        <span class="badge">ボッテガヴェネタ シューズ</span>
                         
                         <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
                         
@@ -4318,24 +4154,24 @@
                         <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
                         
                         
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0112/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17659282229621iplsde36.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
+                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0102/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17402302137023xty3x725844.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
                     </div>
                     <div class="card-body">
                         <div class="stars">★★★☆☆</div>
-                        <h3 class="title">COLE HAAN◆パンプス/US6/BLK/コールハーン/黒</h3>
+                        <h3 class="title">BOTTEGA VENETA◆シューズ/39/GRN/PLANK/プランク/ストレッチニット</h3>
                         
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">39分55秒</span>
+                                <span class="metric-val" style="color: #059669;">4時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">2,860円</span>
+                                <span class="metric-val">22,660円</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">8,000円</span>
+                                <span class="metric-val">30,000円</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">商品の状態</span>
@@ -4347,7 +4183,7 @@
                             </div>
                         </div>
                         
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/c1212692959" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
+                        <a href="https://auctions.yahoo.co.jp/jp/auction/e1174474540" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -4368,16 +4204,16 @@
                         <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
                         
                         
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0203/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17732207527198gcko30239.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
+                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0112/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-1765336687013313sxag39398.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
                     </div>
                     <div class="card-body">
                         <div class="stars">★★★☆☆</div>
-                        <h3 class="title">FURLA◆ハンドバッグ/レザー//</h3>
+                        <h3 class="title">FURLA◆ショルダーバッグ/-/BEG/総柄/SHARE MINI BUCKET</h3>
                         
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">14分41秒</span>
+                                <span class="metric-val" style="color: #059669;">4分52秒</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -4397,7 +4233,7 @@
                             </div>
                         </div>
                         
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/t1222559587" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
+                        <a href="https://auctions.yahoo.co.jp/jp/auction/p1211875100" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -4429,7 +4265,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">9時間</span>
+                                <span class="metric-val" style="color: #059669;">8時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -4479,7 +4315,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">7時間</span>
+                                <span class="metric-val" style="color: #059669;">6時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -4531,7 +4367,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">3時間</span>
+                                <span class="metric-val" style="color: #059669;">2時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
@@ -4559,11 +4395,13 @@
                 
                 
                 
-                <div class="card" data-keyword="マイケルコース シューズ">
+                <div class="card" data-keyword="フェラガモ パンプス シューズ">
                     <div class="card-img-wrapper">
-                        <span class="badge">マイケルコース シューズ</span>
+                        <span class="badge">フェラガモ パンプス シューズ</span>
                         
                         <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
+                        
+                        <span class="badge" style="top:40px; background-color:#d97706;">📸 要写真確認</span>
                         
                         
                         <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
@@ -4572,28 +4410,28 @@
                         <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
                         
                         
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0205/user/96fddb90468fe625eede6f942a82db2c46140fc7417776b8871d5030273aa309/i-img500x600-17798630180430pqvgia145561.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
+                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0106/user/3641761cb5965ae1c25e46fef128dc48024c74d917fbbba78300a82a1ccb4cff/i-img900x1200-17497971471519im4hig34.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
                     </div>
                     <div class="card-body">
                         <div class="stars">★★★☆☆</div>
-                        <h3 class="title">「MICHAEL KORS」 ローカットスニーカー 7 ブラック レディース</h3>
+                        <h3 class="title">Salvatore Ferragamo◆フラットパンプス/UK7/BLK/レザー//</h3>
                         
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">12分38秒</span>
+                                <span class="metric-val" style="color: #059669;">3時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">5,100円</span>
+                                <span class="metric-val">3,300円</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">10,000円</span>
+                                <span class="metric-val">8,000円</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">商品の状態</span>
-                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">未使用に近い</span>
+                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">やや傷や汚れあり</span>
                             </div>
                             <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
                                 <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
@@ -4601,107 +4439,7 @@
                             </div>
                         </div>
                         
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/x1231385962" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
-                    </div>
-                </div>
-                
-                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
-                
-                
-                
-                <div class="card" data-keyword="コーチ 財布">
-                    <div class="card-img-wrapper">
-                        <span class="badge">コーチ 財布</span>
-                        
-                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
-                        
-                        
-                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
-                        
-                        
-                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
-                        
-                        
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0206/user/3db6dc20dda900dc655bd8f7f2efb7d21853fa95d120d4a4615eebf944e044f0/i-img975x669-17802785913549b9pptv16079.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
-                    </div>
-                    <div class="card-body">
-                        <div class="stars">★★★☆☆</div>
-                        <h3 class="title">COACH,財布,ブルー,中古</h3>
-                        
-                        <div class="metrics">
-                            <div class="metric-row">
-                                <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">9分52秒</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">4,400円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">8,000円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">商品の状態</span>
-                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">未使用に近い / サイズ: 判定不要</span>
-                            </div>
-                            <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
-                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
-                                <span class="profit">1,930円</span>
-                            </div>
-                        </div>
-                        
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/b1231928279" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
-                    </div>
-                </div>
-                
-                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
-                
-                
-                
-                <div class="card" data-keyword="コーチ 財布">
-                    <div class="card-img-wrapper">
-                        <span class="badge">コーチ 財布</span>
-                        
-                        <!-- 👑 【改善1】やや汚れあり＝綺麗かも バッジの表示 -->
-                        
-                        
-                        <!-- 👑 【改善3】ホワイト人気 バッジの表示 -->
-                        
-                        
-                        <!-- 👑 【改善4】ソール修復・裏張り警戒 バッジの表示 -->
-                        
-                        
-                        <img class="card-img" src="https://auc-pctr.c.yimg.jp/i/auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0206/user/3db6dc20dda900dc655bd8f7f2efb7d21853fa95d120d4a4615eebf944e044f0/i-img493x600-17802729331929sbuwof132247.jpg?pri=l&w=300&h=300&up=0&nf_src=sy&nf_path=images/auc/pc/top/image/1.0.3/na_170x170.png&nf_st=200" alt="商品画像" onerror="this.src='https://placehold.co/300x200?text=No+Image'">
-                    </div>
-                    <div class="card-body">
-                        <div class="stars">★★★☆☆</div>
-                        <h3 class="title">COACH,財布,ブラック,レザー,中古</h3>
-                        
-                        <div class="metrics">
-                            <div class="metric-row">
-                                <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">15分54秒</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">ヤフオク現在価格</span>
-                                <span class="metric-val">4,400円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">メルカリ想定相場</span>
-                                <span class="metric-val">8,000円</span>
-                            </div>
-                            <div class="metric-row">
-                                <span class="metric-label">商品の状態</span>
-                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">未使用に近い / サイズ: 判定不要</span>
-                            </div>
-                            <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
-                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
-                                <span class="profit">1,930円</span>
-                            </div>
-                        </div>
-                        
-                        <a href="https://auctions.yahoo.co.jp/jp/auction/1231918564" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
+                        <a href="https://auctions.yahoo.co.jp/jp/auction/h1188669290" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
                 
@@ -4733,7 +4471,7 @@
                         <div class="metrics">
                             <div class="metric-row">
                                 <span class="metric-label">残り時間</span>
-                                <span class="metric-val" style="color: #059669;">8時間</span>
+                                <span class="metric-val" style="color: #059669;">7時間</span>
                             </div>
                             <div class="metric-row">
                                 <span class="metric-label">ヤフオク現在価格</span>
