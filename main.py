@@ -648,6 +648,18 @@ def main():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex,nofollow">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JK66RJE602"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JK66RJE602');
+</script>
+
+    
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>AI Frontier Sedori OS - お宝自動検知</title>
     
