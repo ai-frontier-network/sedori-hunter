@@ -941,6 +941,7 @@ def main():
                         </li>
                     </ul>
                 </div>
+                </div>
 
             <div class="intro-card" style="margin-top: 15px; background: #0f172a; color: white;">
                 <h3 style="color: white; margin-top:0; margin-bottom: 10px;">🎯 かんたん3ステップの使い方</h3>
