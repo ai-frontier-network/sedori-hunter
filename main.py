@@ -932,13 +932,15 @@ def main():
                 </div>
                 
                 <div class="intro-card">
-                    <h3>⚠️ ご利用時の注意点</h3>
+                    <h3>⚠️ ご利用時の注意点 ＆ 確認おすすめ時間</h3>
                     <ul>
                         <li><strong>相場は「目安」です：</strong> 表示されているメルカリ想定相場は、ヤフオクの過去の落札履歴（closedsearch）から実勢データを深夜に自動取得して補正した「目安の相場」です。実際の仕入れ時はリンク先からメルカリの現状もお確かめください。</li>
                         <li><strong>最後は人の目で！：</strong> ヤフオクストアはクレーム防止のために状態を低く（やや汚れあり等）申告することが多いです。「📸要写真確認」バッジを目印に、実物が綺麗な状態であれば大チャンスです！</li>
+                        <li><strong>🎯 1日2回の「お宝チェック時間」：</strong> 
+                            自動更新は毎日<strong>【お昼 12:30以降】</strong>と<strong>【深夜 24:30（0:30）以降】</strong>に完了します。ヤフオクは夜21時〜23時台に終了する商品が多いため、特に<strong>【深夜 0:30〜1:00頃】</strong>にチェックすると、ライバルが見落としている当日終了の大本命お宝を一番美味しいタイミングでハントできます！
+                        </li>
                     </ul>
                 </div>
-            </div>
 
             <div class="intro-card" style="margin-top: 15px; background: #0f172a; color: white;">
                 <h3 style="color: white; margin-top:0; margin-bottom: 10px;">🎯 かんたん3ステップの使い方</h3>
