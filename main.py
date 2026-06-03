@@ -11,34 +11,145 @@ from bs4 import BeautifulSoup
 # =====================================================================
 # 👑 Google AdSense 設定（5号店の情報をプリセット済み・デグレ防止）
 # =====================================================================
-# 空白 "" にすると広告コードは一切出力されず、安全に無効化されます。
 ADSENSE_PUBLISHER_ID = "ca-pub-2908004621823900"  # ちゃろさんのパブリッシャーID
 ADSENSE_SLOT_ID = "3799886389"                    # インフィード広告等のスロットID
 
 # ---------------------------------------------------------------------
-# 1. 相場データベース (data.json) の初期化・読み込み
+# 1. 究極せどり相場・カテゴリデータベース (data.json)
 # ---------------------------------------------------------------------
+# ※メルカリでの回転率、送料、サイズを考慮した、ちゃろさん専用DB
 DEFAULT_DB = {
     "market_prices": {
+        # --- ミドルブランド & 財布・バッグ系 ---
         "フルラ 財布": {
+            "category": "wallet",
             "condition_excellent": 11000,  # 未使用に近い
-            "condition_good": 5500,        # やや傷や汚れあり
-            "shipping_fee_est": 370
+            "condition_good": 5500,        # やや傷や汚れあり（特に黒・ジッピーは高め）
+            "shipping_fee_est": 370        # メルカリ送料
         },
-        "エルメス シューズ": {
-            "condition_excellent": 45000,
-            "condition_good": 22000,
+        "フルラ バッグ": {
+            "category": "bag",
+            "condition_excellent": 14000,
+            "condition_good": 7500,
             "shipping_fee_est": 850
         },
         "オールドコーチ": {
-            "condition_excellent": 18000,  # ヴィンテージ品のため良好品は高値
-            "condition_good": 8500,
-            "shipping_fee_est": 750
+            "category": "bag",
+            "condition_excellent": 18000,  # ビンテージ需要
+            "condition_good": 9500,
+            "shipping_fee_est": 850
         },
         "ゲンテン カットワーク": {
-            "condition_excellent": 25000,  # ファンが多く高値で取引される
+            "category": "bag",
+            "condition_excellent": 25000,  # 熱狂的ファンあり
             "condition_good": 12000,
-            "shipping_fee_est": 750
+            "shipping_fee_est": 850
+        },
+        "坂本これくしょん": {
+            "category": "bag",
+            "condition_excellent": 15000,  # ニッチだが10,000円〜15,000円で売れる
+            "condition_good": 9000,
+            "shipping_fee_est": 850
+        },
+        "コーチ 財布": {
+            "category": "wallet",
+            "condition_excellent": 8000,
+            "condition_good": 4000,
+            "shipping_fee_est": 370
+        },
+        "ポールスミス 財布": {
+            "category": "wallet",
+            "condition_excellent": 12000,  # ギフト需要（マルチストライプ等）
+            "condition_good": 6000,
+            "shipping_fee_est": 370
+        },
+        "マイケルコース バッグ": {
+            "category": "bag",
+            "condition_excellent": 12000,
+            "condition_good": 6000,
+            "shipping_fee_est": 850
+        },
+        "ケイトスペード バッグ": {
+            "category": "bag",
+            "condition_excellent": 10000,
+            "condition_good": 5000,
+            "shipping_fee_est": 850
+        },
+        "トリーバーチ バッグ": {
+            "category": "bag",
+            "condition_excellent": 18000,
+            "condition_good": 9500,
+            "shipping_fee_est": 850
+        },
+        "マークジェイコブス バッグ": {
+            "category": "bag",
+            "condition_excellent": 15000,  # スナップショット等の人気作想定
+            "condition_good": 8000,
+            "shipping_fee_est": 850
+        },
+        "アニエスベー がま口": {
+            "category": "wallet",
+            "condition_excellent": 9500,   # メルカリで即売れライン
+            "condition_good": 5000,
+            "shipping_fee_est": 370
+        },
+        
+        # --- 👠 レディース靴ブランド（目標サイズ: 22.5cm〜24.5cm） ---
+        "シャネル サンダル パンプス": {
+            "category": "shoes_ladies",
+            "condition_excellent": 48000,
+            "condition_good": 25000,
+            "shipping_fee_est": 850
+        },
+        "エルメス シューズ サンダル": {
+            "category": "shoes_ladies",
+            "condition_excellent": 55000,
+            "condition_good": 28000,
+            "shipping_fee_est": 850
+        },
+        "ルイヴィトン スニーカー サンダル": {
+            "category": "shoes_ladies",
+            "condition_excellent": 65000,
+            "condition_good": 32000,
+            "shipping_fee_est": 850
+        },
+        "グッチ スニーカー シューズ": {
+            "category": "shoes_ladies",
+            "condition_excellent": 42000,
+            "condition_good": 20000,
+            "shipping_fee_est": 850
+        },
+        "フェラガモ パンプス シューズ": {
+            "category": "shoes_ladies",
+            "condition_excellent": 15000,  # 低単価だが回転早め
+            "condition_good": 8000,
+            "shipping_fee_est": 850
+        },
+        "ダイアナ パンプス ブーツ": {
+            "category": "shoes_ladies",
+            "condition_excellent": 8000,   # 王道回転重視
+            "condition_good": 4000,
+            "shipping_fee_est": 850
+        },
+
+        # --- 👞 メンズ靴ブランド（目標サイズ: 27.0cm〜28.5cm） ---
+        "リーガル ローファー ビジネス": {
+            "category": "shoes_mens",
+            "condition_excellent": 12000,
+            "condition_good": 6500,
+            "shipping_fee_est": 850
+        },
+        "ドクターマーチン ブーツ 3ホール": {
+            "category": "shoes_mens",
+            "condition_excellent": 14000,
+            "condition_good": 7500,
+            "shipping_fee_est": 850
+        },
+        "レッドウィング ブーツ": {
+            "category": "shoes_mens",
+            "condition_excellent": 28000,
+            "condition_good": 15000,
+            "shipping_fee_est": 850
         }
     }
 }
@@ -75,13 +186,58 @@ def parse_yahoo_time(time_text):
     return minutes if minutes > 0 else 9999
 
 # ---------------------------------------------------------------------
-# 3. 利益計算ロジック（期待値算出エンジン）
+# 3. 🧠 高度なサイズ判定エンジン（靴専用・ベストエフォート）
+# ---------------------------------------------------------------------
+def check_shoe_size_ok(title, category):
+    if category not in ["shoes_ladies", "shoes_mens"]:
+        return True, "判定不要" # 靴以外はスルー
+        
+    # タイトルから「cm」表記または「サイズ/EU/US」等の数値を抽出
+    # 例：23.5cm, 24cm, 37, 38, 42, 27.5
+    size_cm = re.search(r'(\d{2}\.\d|\d{2})\s*(?:cm|センチ)?', title)
+    size_eu = re.search(r'(?:サイズ|EU|US|UK)\s*(\d{2}(?:\.\d)?)', title, re.IGNORECASE)
+    
+    detected_size = None
+    if size_cm:
+        detected_size = float(size_cm.group(1))
+    elif size_eu:
+        eu_val = float(size_eu.group(1))
+        # EUサイズを日本サイズ（cm）に簡易換算
+        if eu_val >= 35 and eu_val <= 45:
+            if eu_val < 40: # レディース範囲 (35 -> 22.5, 37 -> 23.5, 39 -> 24.5)
+                detected_size = eu_val - 13.5
+            else: # メンズ範囲 (42 -> 27.0, 44 -> 28.0)
+                detected_size = eu_val - 15.0
+
+    # サイズが全く検出できない場合は、安全のため除外せず「人間による目視対象」としてパスさせる
+    if not detected_size:
+        return True, "サイズ未検出（要目視確認）"
+        
+    if category == "shoes_ladies":
+        # レディースゴールデンサイズ: 22.5cm 〜 24.5cm
+        if 22.5 <= detected_size <= 24.5:
+            return True, f"{detected_size}cm (L判OK)"
+        else:
+            return False, f"{detected_size}cm (L判対象外)"
+            
+    elif category == "shoes_mens":
+        # メンズゴールデンサイズ: 27.0cm 〜 28.5cm
+        if 27.0 <= detected_size <= 28.5:
+            return True, f"{detected_size}cm (M判OK)"
+        else:
+            return False, f"{detected_size}cm (M判対象外)"
+            
+    return True, "判定保留"
+
+# ---------------------------------------------------------------------
+# 4. 📊 利益計算ロジック（ダブル送料・手数料完全シミュレート）
 # ---------------------------------------------------------------------
 def calculate_profit(item, db_entry, keyword):
     title = item["title"]
     price = item["current_price"]
+    category = db_entry["category"]
     
-    # タイトルから状態を推測（擬似コンディション判定）
+    # 1. コンディション自動推定
     is_excellent = any(word in title for word in ["未使用", "極美品", "新品", "デッドストック", "Sランク", "美品"])
     
     if is_excellent:
@@ -91,15 +247,25 @@ def calculate_profit(item, db_entry, keyword):
         m_price = db_entry["condition_good"]
         cond_label = "やや傷や汚れあり (想定)"
         
-    # メルカリ販売手数料（10%）
+    # 2. 手数料・送料計算（ダブル送料の厳密な引算）
+    # メルカリ販売手数料（販売価格の10%）
     mercari_fee = int(m_price * 0.10)
-    # メルカリ送料
-    m_shipping = db_entry["shipping_fee_est"]
-    # ヤフオクから自宅への送料（目安）
-    y_shipping = 500 if "財布" in keyword else 1000
     
+    # メルカリ送料（出品者負担）
+    m_shipping = db_entry["shipping_fee_est"]
+    
+    # ヤフオクストア送料（自宅までの仕入れ送料・一律見積もり）
+    if category in ["wallet"]:
+        y_shipping = 500  # 薄型・小物
+    else:
+        y_shipping = 1000  # バッグ・靴などの大型
+        
+    # 総売り上げ手取り（メルカリ価格 - メルカリ手数料 - メルカリ送料）
     net_revenue = m_price - mercari_fee - m_shipping
+    # 総仕入れコスト（ヤフオク価格 + ヤフオクストア送料）
     total_cost = price + y_shipping
+    
+    # 3. 期待利益計算
     expected_profit = net_revenue - total_cost
     
     if expected_profit >= 5000:
@@ -126,15 +292,14 @@ def calculate_profit(item, db_entry, keyword):
     }
 
 # ---------------------------------------------------------------------
-# 4. メイン処理（Playwright 1起動で巡回するお行儀仕様）
+# 5. メイン巡回処理（Playwright 1起動でお行儀良く負荷軽減巡回）
 # ---------------------------------------------------------------------
 def main():
     all_bargains = []
     
-    print("🚀 お行儀エチケット対応クローラーを起動します...")
+    print("🚀 【究極判定ロジック】お行儀エチケット対応クローラーを起動します...")
     
     with sync_playwright() as p:
-        # ブラウザは1回だけ立ち上げる
         browser = p.chromium.launch(headless=True)
         context = browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
@@ -142,11 +307,10 @@ def main():
         )
         page = context.new_page()
         
-        # 各キーワードを同じブラウザで巡回
+        # 登録されている全キーワードをループ
         for i, (kw, entry) in enumerate(db["market_prices"].items()):
-            # 2つ目以降のキーワードの前に、人間らしいランダムな間隔（3〜7秒）を空ける
             if i > 0:
-                sleep_time = random.uniform(3.0, 7.0)
+                sleep_time = random.uniform(4.0, 8.0)  # キーワードごとに4〜8秒の紳士的なお休み
                 print(f"💤 サーバー負荷軽減のため、{sleep_time:.1f}秒待機します...")
                 time.sleep(sleep_time)
                 
@@ -157,7 +321,7 @@ def main():
             
             try:
                 page.goto(url, timeout=45000)
-                page.wait_for_timeout(3000) # ページ読み込み後の余韻（3秒）
+                page.wait_for_timeout(3000)
                 
                 html_content = page.content()
                 soup = BeautifulSoup(html_content, "html.parser")
@@ -171,6 +335,12 @@ def main():
                             continue
                         title = title_el.text.strip()
                         item_url = title_el.get("href")
+                        
+                        # A. 👡 靴サイズフィルターの事前審査
+                        size_ok, size_info = check_shoe_size_ok(title, entry["category"])
+                        if not size_ok:
+                            # サイズ対象外の場合はその時点で弾く
+                            continue
                         
                         price_text = product.select_one(".Product__priceValue").text
                         price = int(re.sub(r'[^\d]', '', price_text))
@@ -194,8 +364,12 @@ def main():
                         }
                         
                         result = calculate_profit(item_data, entry, kw)
-                        if result["expected_profit"] >= 1000:
+                        # 期待利益が1,500円以上のものだけを表示対象とする
+                        if result["expected_profit"] >= 1500:
                             result["keyword"] = kw
+                            # サイズ情報があれば追加
+                            if "判" in size_info:
+                                result["condition"] += f" / サイズ: {size_info}"
                             all_bargains.append(result)
                             scraped_count += 1
                             
@@ -209,7 +383,7 @@ def main():
                 
         browser.close()
 
-    # 利益順に並び替え
+    # 利益額順に並び替え
     all_bargains.sort(key=lambda x: x["expected_profit"], reverse=True)
     
     # JSONデータベースとして保存
@@ -226,7 +400,7 @@ def main():
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Frontier Sedori OS - お宝自動検知</title>
     
-    <!-- 👑 Google AdSense 自動広告（ポップアップ、アンカー広告制御） -->
+    <!-- 👑 Google AdSense 自動広告（ビネット・アンカー広告制御用） -->
     {% if adsense_id %}
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{adsense_id}}" crossorigin="anonymous"></script>
     {% endif %}
@@ -435,9 +609,14 @@ def main():
         <div class="filter-buttons">
             <button class="filter-btn active" onclick="filterItems('all')">すべて表示</button>
             <button class="filter-btn" onclick="filterItems('フルラ 財布')">フルラ 財布</button>
-            <button class="filter-btn" onclick="filterItems('エルメス シューズ')">エルメス シューズ</button>
+            <button class="filter-btn" onclick="filterItems('フルラ バッグ')">フルラ バッグ</button>
             <button class="filter-btn" onclick="filterItems('オールドコーチ')">オールドコーチ</button>
-            <button class="filter-btn" onclick="filterItems('ゲンテン カットワーク')">ゲンテン カットワーク</button>
+            <button class="filter-btn" onclick="filterItems('ゲンテン カットワーク')">ゲンテン</button>
+            <button class="filter-btn" onclick="filterItems('坂本これくしょん')">坂本これくしょん</button>
+            <button class="filter-btn" onclick="filterItems('エルメス シューズ サンダル')">エルメス靴</button>
+            <button class="filter-btn" onclick="filterItems('シャネル サンダル パンプス')">シャネル靴</button>
+            <button class="filter-btn" onclick="filterItems('ルイヴィトン スニーカー サンダル')">ヴィトン靴</button>
+            <button class="filter-btn" onclick="filterItems('リーガル ローファー ビジネス')">リーガル</button>
         </div>
         
         <div class="grid" id="item-grid">
@@ -470,7 +649,7 @@ def main():
                                 <span class="metric-val">{{item.condition}}</span>
                             </div>
                             <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
-                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値</span>
+                                <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
                                 <span class="profit">{{item.profit_formatted}}</span>
                             </div>
                         </div>
@@ -479,7 +658,7 @@ def main():
                     </div>
                 </div>
                 
-                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入（デグレ防止設計） -->
+                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入 -->
                 {% if loop.index == 3 and adsense_id and adsense_slot %}
                 <div class="adsense-container">
                     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{adsense_id}}" crossorigin="anonymous"></script>
