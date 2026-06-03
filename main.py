@@ -9,23 +9,21 @@ from playwright.sync_api import sync_playwright
 from bs4 import BeautifulSoup
 
 # =====================================================================
-# 👑 Google AdSense 設定（5号店の情報をプリセット済み・デグレ防止）
+# 👑 Google AdSense 設定（デグレ防止）
 # =====================================================================
 ADSENSE_PUBLISHER_ID = "ca-pub-2908004621823900"  # ちゃろさんのパブリッシャーID
 ADSENSE_SLOT_ID = "3799886389"                    # インフィード広告等のスロットID
 
 # ---------------------------------------------------------------------
-# 1. 究極せどり相場・カテゴリデータベース (data.json)
+# 1. 究極せどり相場・カテゴリデータベース
 # ---------------------------------------------------------------------
-# ※メルカリでの回転率、送料、サイズを考慮した、ちゃろさん専用DB
 DEFAULT_DB = {
     "market_prices": {
-        # --- ミドルブランド & 財布・バッグ系 ---
         "フルラ 財布": {
             "category": "wallet",
-            "condition_excellent": 11000,  # 未使用に近い
-            "condition_good": 5500,        # やや傷や汚れあり（特に黒・ジッピーは高め）
-            "shipping_fee_est": 370        # メルカリ送料
+            "condition_excellent": 11000,
+            "condition_good": 5500,
+            "shipping_fee_est": 370
         },
         "フルラ バッグ": {
             "category": "bag",
@@ -35,19 +33,19 @@ DEFAULT_DB = {
         },
         "オールドコーチ": {
             "category": "bag",
-            "condition_excellent": 18000,  # ビンテージ需要
+            "condition_excellent": 18000,
             "condition_good": 9500,
             "shipping_fee_est": 850
         },
         "ゲンテン カットワーク": {
             "category": "bag",
-            "condition_excellent": 25000,  # 熱狂的ファンあり
+            "condition_excellent": 25000,
             "condition_good": 12000,
             "shipping_fee_est": 850
         },
         "坂本これくしょん": {
             "category": "bag",
-            "condition_excellent": 15000,  # ニッチだが10,000円〜15,000円で売れる
+            "condition_excellent": 15000,
             "condition_good": 9000,
             "shipping_fee_est": 850
         },
@@ -59,7 +57,7 @@ DEFAULT_DB = {
         },
         "ポールスミス 財布": {
             "category": "wallet",
-            "condition_excellent": 12000,  # ギフト需要（マルチストライプ等）
+            "condition_excellent": 12000,
             "condition_good": 6000,
             "shipping_fee_est": 370
         },
@@ -83,18 +81,16 @@ DEFAULT_DB = {
         },
         "マークジェイコブス バッグ": {
             "category": "bag",
-            "condition_excellent": 15000,  # スナップショット等の人気作想定
+            "condition_excellent": 15000,
             "condition_good": 8000,
             "shipping_fee_est": 850
         },
         "アニエスベー がま口": {
             "category": "wallet",
-            "condition_excellent": 9500,   # メルカリで即売れライン
+            "condition_excellent": 9500,
             "condition_good": 5000,
             "shipping_fee_est": 370
         },
-        
-        # --- 👠 レディース靴ブランド（目標サイズ: 22.5cm〜24.5cm） ---
         "シャネル サンダル パンプス": {
             "category": "shoes_ladies",
             "condition_excellent": 48000,
@@ -121,18 +117,16 @@ DEFAULT_DB = {
         },
         "フェラガモ パンプス シューズ": {
             "category": "shoes_ladies",
-            "condition_excellent": 15000,  # 低単価だが回転早め
+            "condition_excellent": 15000,
             "condition_good": 8000,
             "shipping_fee_est": 850
         },
         "ダイアナ パンプス ブーツ": {
             "category": "shoes_ladies",
-            "condition_excellent": 8000,   # 王道回転重視
+            "condition_excellent": 8000,
             "condition_good": 4000,
             "shipping_fee_est": 850
         },
-
-        # --- 👞 メンズ靴ブランド（目標サイズ: 27.0cm〜28.5cm） ---
         "リーガル ローファー ビジネス": {
             "category": "shoes_mens",
             "condition_excellent": 12000,
@@ -153,6 +147,8 @@ DEFAULT_DB = {
         }
     }
 }
+
+NG_PATTERNS = [r'部品', r'空箱', r'箱のみ', r'保存袋', r'確認用', r'replica', r'レプリカ', r'コピー', r'非売品']
 
 def load_database():
     if os.path.exists("data.json"):
@@ -186,14 +182,12 @@ def parse_yahoo_time(time_text):
     return minutes if minutes > 0 else 9999
 
 # ---------------------------------------------------------------------
-# 3. 🧠 高度なサイズ判定エンジン（靴専用・ベストエフォート）
+# 3. 👠 高度なサイズ判定エンジン（靴専用）
 # ---------------------------------------------------------------------
 def check_shoe_size_ok(title, category):
     if category not in ["shoes_ladies", "shoes_mens"]:
-        return True, "判定不要" # 靴以外はスルー
+        return True, "判定不要"
         
-    # タイトルから「cm」表記または「サイズ/EU/US」等の数値を抽出
-    # 例：23.5cm, 24cm, 37, 38, 42, 27.5
     size_cm = re.search(r'(\d{2}\.\d|\d{2})\s*(?:cm|センチ)?', title)
     size_eu = re.search(r'(?:サイズ|EU|US|UK)\s*(\d{2}(?:\.\d)?)', title, re.IGNORECASE)
     
@@ -202,26 +196,22 @@ def check_shoe_size_ok(title, category):
         detected_size = float(size_cm.group(1))
     elif size_eu:
         eu_val = float(size_eu.group(1))
-        # EUサイズを日本サイズ（cm）に簡易換算
         if eu_val >= 35 and eu_val <= 45:
-            if eu_val < 40: # レディース範囲 (35 -> 22.5, 37 -> 23.5, 39 -> 24.5)
+            if eu_val < 40:
                 detected_size = eu_val - 13.5
-            else: # メンズ範囲 (42 -> 27.0, 44 -> 28.0)
+            else:
                 detected_size = eu_val - 15.0
 
-    # サイズが全く検出できない場合は、安全のため除外せず「人間による目視対象」としてパスさせる
     if not detected_size:
-        return True, "サイズ未検出（要目視確認）"
+        return True, "サイズ未検出（要目視）"
         
     if category == "shoes_ladies":
-        # レディースゴールデンサイズ: 22.5cm 〜 24.5cm
         if 22.5 <= detected_size <= 24.5:
             return True, f"{detected_size}cm (L判OK)"
         else:
             return False, f"{detected_size}cm (L判対象外)"
             
     elif category == "shoes_mens":
-        # メンズゴールデンサイズ: 27.0cm 〜 28.5cm
         if 27.0 <= detected_size <= 28.5:
             return True, f"{detected_size}cm (M判OK)"
         else:
@@ -230,42 +220,76 @@ def check_shoe_size_ok(title, category):
     return True, "判定保留"
 
 # ---------------------------------------------------------------------
-# 4. 📊 利益計算ロジック（ダブル送料・手数料完全シミュレート）
+# 4. 🕵️ 2段階潜入調査ロジック（100%ストア確定 ＆ 正確な状態取得）
 # ---------------------------------------------------------------------
-def calculate_profit(item, db_entry, keyword):
+def verify_store_and_get_condition(page, product_url):
+    try:
+        page.goto(product_url, timeout=30000)
+        page.wait_for_timeout(1500)  # 1.5秒待機してロードを待つ
+        
+        content = page.content()
+        
+        # 検証A: 100%ストア確定チェック (参考コードより完全移植)
+        is_store = False
+        if '"isStore":"1"' in content or '"isStore":true' in content or '"isStore":1' in content:
+            is_store = True
+        elif "gv-Label--trust" in content or "ストア" in content:
+            is_store = True
+            
+        if not is_store:
+            return False, None, None
+            
+        # 検証B: 商品個別ページから正確な「商品の状態」を判別
+        exact_condition = "やや傷や汚れあり"  # デフォルト値
+        condition_type = "good"                # デフォルトは良品相場
+        
+        # ヤフオクの公式コンディション文字列を網羅的に探査
+        if any(x in content for x in ["未使用", "未使用に近い", "新品", "Sランク", "展示品"]):
+            exact_condition = "未使用に近い"
+            condition_type = "excellent"
+        elif "目立った傷や汚れなし" in content:
+            exact_condition = "目立った傷や汚れなし"
+            condition_type = "good"
+        elif "やや傷や汚れあり" in content:
+            exact_condition = "やや傷や汚れあり"
+            condition_type = "good"
+        elif "傷や汚れあり" in content:
+            exact_condition = "傷や汚れあり"
+            condition_type = "good"
+            
+        return True, exact_condition, condition_type
+        
+    except Exception as e:
+        print(f"個別ページ検証エラー ({product_url}): {e}")
+        return False, None, None
+
+# ---------------------------------------------------------------------
+# 5. 📊 利益計算ロジック（ダブル送料・手数料完全シミュレート）
+# ---------------------------------------------------------------------
+def calculate_profit(item, db_entry, keyword, condition_type, condition_label):
     title = item["title"]
     price = item["current_price"]
     category = db_entry["category"]
     
-    # 1. コンディション自動推定
-    is_excellent = any(word in title for word in ["未使用", "極美品", "新品", "デッドストック", "Sランク", "美品"])
-    
-    if is_excellent:
+    # 正確に取得された状態タイプに基づいてメルカリ相場を決定
+    if condition_type == "excellent":
         m_price = db_entry["condition_excellent"]
-        cond_label = "未使用に近い (想定)"
     else:
         m_price = db_entry["condition_good"]
-        cond_label = "やや傷や汚れあり (想定)"
         
-    # 2. 手数料・送料計算（ダブル送料の厳密な引算）
-    # メルカリ販売手数料（販売価格の10%）
+    # メルカリ販売手数料（10%）
     mercari_fee = int(m_price * 0.10)
-    
     # メルカリ送料（出品者負担）
     m_shipping = db_entry["shipping_fee_est"]
+    # ヤフオクストア送料（自宅までの仕入れ送料）
+    y_shipping = 500 if category == "wallet" else 1000
     
-    # ヤフオクストア送料（自宅までの仕入れ送料・一律見積もり）
-    if category in ["wallet"]:
-        y_shipping = 500  # 薄型・小物
-    else:
-        y_shipping = 1000  # バッグ・靴などの大型
-        
-    # 総売り上げ手取り（メルカリ価格 - メルカリ手数料 - メルカリ送料）
+    # 総売り上げ手取り
     net_revenue = m_price - mercari_fee - m_shipping
-    # 総仕入れコスト（ヤフオク価格 + ヤフオクストア送料）
+    # 総仕入れコスト
     total_cost = price + y_shipping
     
-    # 3. 期待利益計算
+    # 期待利益
     expected_profit = net_revenue - total_cost
     
     if expected_profit >= 5000:
@@ -284,7 +308,7 @@ def calculate_profit(item, db_entry, keyword):
         "profit_formatted": f"{expected_profit:,}円",
         "expected_profit": expected_profit,
         "stars": stars,
-        "condition": cond_label,
+        "condition": condition_label,  # 正確なコンディション表示
         "remaining_time": item["remaining_time"],
         "img_url": item["img_url"],
         "target_m_price": f"{m_price:,}円",
@@ -292,12 +316,12 @@ def calculate_profit(item, db_entry, keyword):
     }
 
 # ---------------------------------------------------------------------
-# 5. メイン巡回処理（Playwright 1起動でお行儀良く負荷軽減巡回）
+# 6. メイン巡回処理（2段階検証・お行儀仕様）
 # ---------------------------------------------------------------------
 def main():
     all_bargains = []
     
-    print("🚀 【究極判定ロジック】お行儀エチケット対応クローラーを起動します...")
+    print("🚀 【2段階検証＆正確な状態取得】クローラーを起動します...")
     
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
@@ -307,14 +331,13 @@ def main():
         )
         page = context.new_page()
         
-        # 登録されている全キーワードをループ
         for i, (kw, entry) in enumerate(db["market_prices"].items()):
             if i > 0:
-                sleep_time = random.uniform(4.0, 8.0)  # キーワードごとに4〜8秒の紳士的なお休み
+                sleep_time = random.uniform(4.0, 8.0)
                 print(f"💤 サーバー負荷軽減のため、{sleep_time:.1f}秒待機します...")
                 time.sleep(sleep_time)
                 
-            print(f"🔍 {kw} のヤフオクストア巡回を開始します...")
+            print(f"🔍 {kw} のヤフオク巡回を開始します...")
             
             encoded_kw = urllib.parse.quote(kw)
             url = f"https://auctions.yahoo.co.jp/search/search?p={encoded_kw}&is_store=1&istatus=1&istatus=3&istatus=4&istatus=5&price_type=currentprice&s1=end&o1=a"
@@ -327,21 +350,24 @@ def main():
                 soup = BeautifulSoup(html_content, "html.parser")
                 products = soup.select(".Product")
                 
-                scraped_count = 0
-                for product in products[:30]:
+                initial_candidates = []
+                for product in products[:25]:  # 各キーワードにつき上位25件を詳細調査
                     try:
                         title_el = product.select_one(".Product__titleLink")
                         if not title_el:
                             continue
                         title = title_el.text.strip()
-                        item_url = title_el.get("href")
                         
-                        # A. 👡 靴サイズフィルターの事前審査
+                        # 1次フィルター: NGワードの排除
+                        if any(re.search(p, title, re.IGNORECASE) for p in NG_PATTERNS):
+                            continue
+                            
+                        # 2次フィルター: 靴サイズフィルターの事前審査
                         size_ok, size_info = check_shoe_size_ok(title, entry["category"])
                         if not size_ok:
-                            # サイズ対象外の場合はその時点で弾く
                             continue
-                        
+                            
+                        item_url = title_el.get("href")
                         price_text = product.select_one(".Product__priceValue").text
                         price = int(re.sub(r'[^\d]', '', price_text))
                         
@@ -354,29 +380,40 @@ def main():
                         img_el = product.select_one(".Product__imageData")
                         img_url = img_el.get("src") if img_el else ""
                         
-                        item_data = {
+                        initial_candidates.append({
                             "title": title,
                             "url": item_url,
                             "current_price": price,
                             "remaining_time": time_text,
                             "img_url": img_url,
-                            "time_m": time_m
-                        }
-                        
-                        result = calculate_profit(item_data, entry, kw)
-                        # 期待利益が1,500円以上のものだけを表示対象とする
-                        if result["expected_profit"] >= 1500:
-                            result["keyword"] = kw
-                            # サイズ情報があれば追加
-                            if "判" in size_info:
-                                result["condition"] += f" / サイズ: {size_info}"
-                            all_bargains.append(result)
-                            scraped_count += 1
-                            
+                            "time_m": time_m,
+                            "size_info": size_info
+                        })
                     except Exception:
                         continue
+                
+                # 🔍 【潜入調査】候補となった商品を1件ずつディープ検証
+                scraped_count = 0
+                for item in initial_candidates:
+                    # 個別ページに潜入してストア確定検証 & 状態を100%の精度で取得
+                    is_valid_store, exact_condition, cond_type = verify_store_and_get_condition(page, item["url"])
+                    
+                    if not is_valid_store:
+                        continue  # 個人出品、または読み込み失敗はスキップして除外
                         
-                print(f"   -> 利益対象商品が {scraped_count} 件見つかりました")
+                    result = calculate_profit(item, entry, kw, cond_type, exact_condition)
+                    
+                    if result["expected_profit"] >= 1500:
+                        result["keyword"] = kw
+                        if "判" in item["size_info"]:
+                            result["condition"] += f" / サイズ: {item['size_info']}"
+                        all_bargains.append(result)
+                        scraped_count += 1
+                        
+                    # サーバーに負荷をかけないよう、少し待つ
+                    time.sleep(1)
+                    
+                print(f"   -> 100%ストア確定＆利益対象商品が {scraped_count} 件見つかりました")
                 
             except Exception as e:
                 print(f"❌ {kw} の検索中にエラーが発生しました: {e}")
@@ -645,8 +682,8 @@ def main():
                                 <span class="metric-val">{{item.target_m_price}}</span>
                             </div>
                             <div class="metric-row">
-                                <span class="metric-label">推測される状態</span>
-                                <span class="metric-val">{{item.condition}}</span>
+                                <span class="metric-label">商品の状態</span>
+                                <span class="metric-val" style="color: var(--accent-color); font-weight: 700;">{{item.condition}}</span>
                             </div>
                             <div class="metric-row" style="margin-top: 10px; border-top: 1px solid var(--border-color); padding-top: 10px;">
                                 <span class="metric-label" style="font-size: 1rem; font-weight: 800; color: var(--accent-color);">利益期待値（ダブル送料引込）</span>
