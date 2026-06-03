@@ -466,7 +466,7 @@ def calculate_profit(item, db_entry, keyword, condition_type, condition_label):
     else:
         m_price = db_entry["condition_good"]
         
-    # 🔴 白・オールホワイトスニーカーは人気のため利益見込みを10%上乗せ（誤検知完全防止ロジックへアップグレード）
+    # 🔴 「白」の誤検知フィルター搭載（面白い・告白等の無関係な単語を完全除外） (潜在問題②対策)
     WHITE_NOISE_WORDS = ["面白い", "面白", "告白", "白木屋", "白川", "白紙", "余白", "白黒"]
     is_white_sneaker = any(w in title for w in ["ホワイト", "WHITE", "white", "オールホワイト", "白色"])
     if not is_white_sneaker and "白" in title:
@@ -915,7 +915,7 @@ def main():
     <div class="container">
         <div class="update-time">最終更新: {{last_update}}</div>
 
-<!-- 👑 イントロダクション（説明文）ブロック -->
+        <!-- 👑 イントロダクション（説明文）ブロック -->
         <div class="intro-box">
             <h2>✨ AI Frontier Sedori OS へようこそ！</h2>
             <p>このサイトは、24時間完全自動のお宝検知サイトです。維持費0円の最強インフラ（GHC × 独自ロジック）で稼働しています。</p>
