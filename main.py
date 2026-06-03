@@ -844,17 +844,112 @@ def main():
             min-height: 100px;
             width: 100%;
         }
+
+        /* 👑 イントロダクション（説明文）カードのデザイン */
+        .intro-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+        .intro-box h2 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            color: #0f172a;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 8px;
+            font-weight: 800;
+        }
+        .intro-box p {
+            font-size: 0.95rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .intro-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .intro-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 18px;
+        }
+        .intro-card h3 {
+            margin-top: 0;
+            font-size: 1.05rem;
+            color: #0f172a;
+            font-weight: 700;
+        }
+        .intro-card ul, .intro-card ol {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 0.88rem;
+            color: #334155;
+            line-height: 1.7;
+        }
+        .intro-card li {
+            margin-bottom: 8px;
+        }
+        .intro-card li:last-child {
+            margin-bottom: 0;
+        }
+        
     </style>
 </head>
 <body>
     <header>
         <h1>AI Frontier Sedori OS</h1>
-        <p>生活防衛・自立支援のための、高利益期待お宝自動検知プラットフォーム</p>
+        <p>高利益期待お宝自動検知プラットフォーム</p>
     </header>
     
     <div class="container">
         <div class="update-time">最終更新: {{last_update}}</div>
-        
+
+<!-- 👑 イントロダクション（説明文）ブロック -->
+        <div class="intro-box">
+            <h2>✨ AI Frontier Sedori OS へようこそ！</h2>
+            <p>このサイトは、24時間完全自動のお宝検知サイトです。維持費0円の最強インフラ（GHC × 独自ロジック）で稼働しています。</p>
+            
+            <div class="intro-grid">
+                <div class="intro-card">
+                    <h3>💡 このサイトのメリット</h3>
+                    <ul>
+                        <li><strong>ストア限定：</strong> トラブルや偽物のリスクが多い個人出品を完璧に排除。安全な「ストアアカウント」の優良案件のみを厳選。</li>
+                        <li><strong>ダブル送料＆手数料を自動計算：</strong> メルカリ手数料（10%）と、ダブル送料（ヤフオク仕入れ送料＋メルカリ発送送料）をあらかじめ自動で差し引いて、純粋な「手取り期待利益」を算出しています！</li>
+                        <li><strong>サイズ＆致命的欠陥の除外：</strong> 最も売れやすい「ゴールデンサイズ」のみを自動判定。ソール破れやカビなどのジャンク品は1次フィルターで徹底除外します。</li>
+                        <li><strong>お助け警告バッジ：</strong> 「📸要写真確認」「⭐ホワイト人気」「⚠️ソール補修/裏張」を自動解析して表示します。</li>
+                    </ul>
+                </div>
+                
+                <div class="intro-card">
+                    <h3>⚠️ ご利用時の注意点</h3>
+                    <ul>
+                        <li><strong>相場は「目安」です：</strong> 表示されているメルカリ想定相場は、ヤフオクの過去の落札履歴（closedsearch）から実勢データを深夜に自動取得して補正した「目安の相場」です。実際の仕入れ時はリンク先からメルカリの現状もお確かめください。</li>
+                        <li><strong>最後は人の目で！：</strong> ヤフオクストアはクレーム防止のために状態を低く（やや汚れあり等）申告することが多いです。「📸要写真確認」バッジを目印に、実物が綺麗な状態であれば大チャンスです！</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="intro-card" style="margin-top: 15px; background: #0f172a; color: white;">
+                <h3 style="color: white; margin-top:0; margin-bottom: 10px;">🎯 かんたん3ステップの使い方</h3>
+                <ol style="margin-bottom:0; padding-left:20px; color: #cbd5e1;">
+                    <li>下の<strong>「フィルターボタン」</strong>を押して、得意なブランドを絞り込みます。</li>
+                    <li>利益期待値が高く、星マーク（★★★★★）が多いお宝商品を探します。</li>
+                    <li>「ヤフオクで商品を見る」ボタンを押し、写真を確認して綺麗な状態であれば仕入れを行い、メルカリで販売します！</li>
+                </ol>
+            </div>
+        </div>
+      
         <div class="filter-buttons">
             <button class="filter-btn active" onclick="filterItems('all')">すべて表示</button>
             <button class="filter-btn" onclick="filterItems('フルラ 財布')">フルラ 財布</button>
