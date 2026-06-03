@@ -8,6 +8,13 @@ from datetime import datetime
 from playwright.sync_api import sync_playwright
 from bs4 import BeautifulSoup
 
+# =====================================================================
+# 👑 Google AdSense 設定（5号店の情報をプリセット済み・デグレ防止）
+# =====================================================================
+# 空白 "" にすると広告コードは一切出力されず、安全に無効化されます。
+ADSENSE_PUBLISHER_ID = "ca-pub-2908004621823900"  # ちゃろさんのパブリッシャーID
+ADSENSE_SLOT_ID = "3799886389"                    # インフィード広告等のスロットID
+
 # ---------------------------------------------------------------------
 # 1. 相場データベース (data.json) の初期化・読み込み
 # ---------------------------------------------------------------------
@@ -218,6 +225,12 @@ def main():
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Frontier Sedori OS - お宝自動検知</title>
+    
+    <!-- 👑 Google AdSense 自動広告（ポップアップ、アンカー広告制御） -->
+    {% if adsense_id %}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{adsense_id}}" crossorigin="anonymous"></script>
+    {% endif %}
+
     <style>
         :root {
             --bg-color: #fafaf9;
@@ -401,6 +414,13 @@ def main():
             border-top: 1px solid var(--border-color);
             margin-top: 60px;
         }
+        .adsense-container {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin: 20px 0;
+            min-height: 100px;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
@@ -458,6 +478,21 @@ def main():
                         <a href="{{item.url}}" target="_blank" class="btn-link">ヤフオクで商品を見る &rarr;</a>
                     </div>
                 </div>
+                
+                <!-- 👑 インフィード広告を3番目のカードの直後に自動挿入（デグレ防止設計） -->
+                {% if loop.index == 3 and adsense_id and adsense_slot %}
+                <div class="adsense-container">
+                    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{adsense_id}}" crossorigin="anonymous"></script>
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-format="fluid"
+                         data-ad-layout-key="-fb+5w+4e-db+86"
+                         data-ad-client="{{adsense_id}}"
+                         data-ad-slot="{{adsense_slot}}"></ins>
+                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                </div>
+                {% endif %}
+                
                 {% endfor %}
             {% else %}
                 <div class="no-data">現在、基準を満たすお得な案件はありません。次回の巡回をお待ちください。</div>
@@ -495,7 +530,9 @@ def main():
     template = Template(html_template)
     rendered_html = template.render(
         last_update=db["last_update"],
-        bargains=all_bargains
+        bargains=all_bargains,
+        adsense_id=ADSENSE_PUBLISHER_ID if ADSENSE_PUBLISHER_ID else None,
+        adsense_slot=ADSENSE_SLOT_ID if ADSENSE_SLOT_ID else None
     )
     
     with open("index.html", "w", encoding="utf-8") as f:
