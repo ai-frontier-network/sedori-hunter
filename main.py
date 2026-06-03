@@ -647,6 +647,8 @@ def main():
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>AI Frontier Sedori OS - お宝自動検知</title>
     
     <!-- 👑 Google AdSense 自動広告 -->
